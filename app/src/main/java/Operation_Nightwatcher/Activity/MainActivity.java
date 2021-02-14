@@ -1,8 +1,10 @@
-package com.td.OperationNightwatcher;
+package Operation_Nightwatcher.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.td.OperationNightwatcher.R;
 
 public class MainActivity extends AppCompatActivity {
 
