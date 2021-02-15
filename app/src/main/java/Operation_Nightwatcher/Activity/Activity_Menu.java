@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.td.OperationNightwatcher.R;
 
-public class Activity_Main_Menu extends AppCompatActivity implements View.OnClickListener {
+public class Activity_Menu extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_menu);
 
         // Initialize textViews and buttons
         TextView tittle = findViewById(R.id.title);
@@ -43,7 +43,6 @@ public class Activity_Main_Menu extends AppCompatActivity implements View.OnClic
                 startActivity(j);
                 finish();
                 break;
-            // User wants to quit the App
             case R.id.tdgamesButton:
                 finish();
                 break;
