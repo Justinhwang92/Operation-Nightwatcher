@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OperationNightwatcher">
-        <activity android:name="Operation_Nightwatcher.Activity.MainActivity">
+        <activity android:name="Operation_Nightwatcher.Activity.Activity_Main_Menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
