@@ -31,7 +31,7 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(this, Activity_Game.class);
+        Intent i = new Intent(this, Activity_SignIn.class);
         Intent j = new Intent(this, Activity_Instruction.class);
 
         switch (view.getId()) {
