@@ -18,7 +18,6 @@ public class Activity_SignIn extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_signin);
 
         // Initialize textView and button
-        TextView askUserName = findViewById(R.id.askUserName);
         EditText userName = findViewById(R.id.userName);
         Button okButton = findViewById(R.id.okButton);
 

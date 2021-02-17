@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
     <TextView
         android:id="@+id/title"
         style="@style/TittleStyle"
         android:layout_marginTop="@dimen/_35sdp"
         android:text="Operation Nightwatcher"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +21,7 @@
         style="@style/ButtonStyle"
         android:layout_marginTop="@dimen/_25sdp"
         android:text="Play Now"
-        android:textColor="#3A3A3A"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -28,7 +30,7 @@
         android:id="@+id/instructionButton"
         style="@style/ButtonStyle"
         android:text="Instruction"
-        android:textColor="#3A3A3A"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playButton" />
@@ -37,7 +39,7 @@
         android:id="@+id/tdgamesButton"
         style="@style/ButtonStyle"
         android:text="TD Games"
-        android:textColor="#3A3A3A"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructionButton" />
