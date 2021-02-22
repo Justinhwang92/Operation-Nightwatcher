@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OperationNightwatcher">
         <activity
-            android:name="Operation_Nightwatcher.Activity.Activity_Menu">
+            android:name="Operation_Nightwatcher.Activity.Activity_Menu"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
