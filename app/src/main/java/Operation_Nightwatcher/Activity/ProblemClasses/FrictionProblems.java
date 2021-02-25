@@ -7,20 +7,45 @@ import Operation_Nightwatcher.Activity.ProblemClasses.AbstractQuestions;
 
 public class FrictionProblems extends AbstractQuestions {
 
+    /**
+     * Random generator to generate random int values.
+     */
+    Random rnd;
+
+    /**
+     * String to store current question
+     */
+    String myQue;
+
+    /**
+     * String value to store correct answer in 2 decimal points
+     */
+    String ans;
+
+    /**
+     * Double values to store static force, friction force and weight of the object
+     */
     double force_static;
     double force_friction;
     double weighing;
+
+    /**
+     * BigDecimal values to store static friction coefficient and kinetic coefficient
+     */
     BigDecimal mu_s;
     BigDecimal mu_k;
-    Random rnd;
-    String myQue;
-    String ans;
 
+    /**
+     * Constructor to initialize the random object
+     */
     public FrictionProblems(){
         rnd = new Random();
         generateQuestions();
     }
 
+    /**
+     * Method to generate the different questions
+     */
     private void generateQuestions() {
 
         weighing = (rnd.nextInt(20)+1)*10;
@@ -49,12 +74,19 @@ public class FrictionProblems extends AbstractQuestions {
         }
     }
 
-
+    /**
+     * To get the question
+     * @return String myQue
+     */
     @Override
     public String getQuestion() {
         return myQue;
     }
 
+    /**
+     * To get the answer
+     * @return String the correct answer
+     */
     @Override
     public String getAnswer() {
         return ans;

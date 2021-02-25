@@ -1,10 +1,13 @@
 package Operation_Nightwatcher.Activity.ProblemClasses.Test;
 
+import android.opengl.EGLImage;
+
 import Operation_Nightwatcher.Activity.ProblemClasses.AccelerationQuestion;
 import Operation_Nightwatcher.Activity.ProblemClasses.EquationsofMotion;
 import Operation_Nightwatcher.Activity.ProblemClasses.FrictionProblems;
 import Operation_Nightwatcher.Activity.ProblemClasses.GravitationEnergy;
 import Operation_Nightwatcher.Activity.ProblemClasses.KineticEnergy;
+import Operation_Nightwatcher.Activity.ProblemClasses.MagneticField;
 import Operation_Nightwatcher.Activity.ProblemClasses.QuadraticEquation;
 import Operation_Nightwatcher.Activity.ProblemClasses.WorkDoneQuestions;
 
@@ -36,9 +39,14 @@ class AbstractQuestionsTest {
 
         AccelerationQuestion aq = new AccelerationQuestion();
 
+        //needs to work on negative value generated for asnwer
         WorkDoneQuestions wd = new WorkDoneQuestions();
         System.out.println(wd.getQuestion());
         System.out.println(wd.getAnswer());
+
+        MagneticField mg = new MagneticField();
+        System.out.println(mg.getQuestion());
+        System.out.println(mg.getAnswer());
 
     }
 

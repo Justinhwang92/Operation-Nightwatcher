@@ -3,24 +3,63 @@ package Operation_Nightwatcher.Activity.ProblemClasses;
 import java.math.BigDecimal;
 import java.util.Random;
 
+//https://www.sparknotes.com/physics/workenergypower/workpower/problems/
+
+/**
+ * Class to generate question related work done by an object
+ */
 public class WorkDoneQuestions extends AbstractQuestions {
 
+    /**
+     * Constant double value for gravitation constant which is 9.8 m/s^2
+     */
     double GRAVITATIONAL_CONSTANT = 9.8;
 
+    /**
+     * Random generator to generate random int values.
+     */
     Random rnd;
+
+    /**
+     * String to store current question
+     */
     String myQue;
+
+    /**
+     * BigDecimal value to store correct answer in 2 decimal points
+     */
     BigDecimal ans;
-    double angleRadian;
-    double angle;
+
+
+    /**
+     * Double type values
+     * angle in degree, angleRadian in radian value
+     */
+    double angleRadian, angle;
+
+    /**
+     * int values to store distance and weight of an object
+     */
     int distance, weight;
+
+    /**
+     * Double values to store coefficient of friction and force to be needed on object
+     */
     double mu_friction, force;
 
+    /**
+     * Constructor to initialize the random object
+     */
     public WorkDoneQuestions(){
         rnd = new Random();
         generateQuestion();
 
     }
 
+    /**
+     * Private method to generate random values for the different variables
+     * Generates question and correct answer
+     */
     private void generateQuestion(){
 
         angle = rnd.nextInt(22)+ 25.0;
@@ -47,6 +86,9 @@ public class WorkDoneQuestions extends AbstractQuestions {
         generateAnswer();
     }
 
+    /**
+     * To generate the correct answer for the question
+     */
     private void generateAnswer(){
 
         double F = force - (weight*GRAVITATIONAL_CONSTANT)*Math.sin(angleRadian) - mu_friction*(weight*GRAVITATIONAL_CONSTANT)*Math.cos(angleRadian);
@@ -58,11 +100,19 @@ public class WorkDoneQuestions extends AbstractQuestions {
         ans = new BigDecimal(W+"").setScale(2, BigDecimal.ROUND_CEILING);
     }
 
+    /**
+     * To get the question
+     * @return String myQue
+     */
     @Override
     public String getQuestion() {
         return myQue;
     }
 
+    /**
+     * To get the answer
+     * @return String the correct answer
+     */
     @Override
     public String getAnswer() {
         return ans+"";

@@ -7,18 +7,43 @@ public class GravitationEnergy {
 
     private double GRAVITATIONAL_CONSTANT = 9.8;
 
+    /**
+     * Random generator to generate random int values.
+     */
     Random rnd;
-    double mass;
-    double height;
-    BigDecimal energy;
+
+    /**
+     * String to store current question
+     */
     String myQue;
+
+    /**
+     * String value to store correct answer in 2 decimal points
+     */
     String ans;
 
+    /**
+     * Double values to store mass nd height of the object
+     */
+    double mass;
+    double height;
+
+    /**
+     * BigDecimal value to store energy
+     */
+    BigDecimal energy;
+
+    /**
+     * Constructor to initialize the random object
+     */
     public GravitationEnergy(){
         rnd = new Random();
         generateQuestion();
     }
 
+    /**
+     * Method to generate the different questions
+     */
     private void generateQuestion() {
         BigDecimal temp = new BigDecimal("0.100");
         BigDecimal a = temp.multiply(new BigDecimal(rnd.nextInt(10)+1+""));
@@ -26,12 +51,11 @@ public class GravitationEnergy {
         height = rnd.nextInt(12)+1;
         mass = a.doubleValue();
         BigDecimal t = new BigDecimal(GRAVITATIONAL_CONSTANT+"");
-        BigDecimal energy = t.multiply(new BigDecimal(mass*height+"")).setScale(2, BigDecimal.ROUND_CEILING);
+        energy = t.multiply(new BigDecimal(mass*height+"")).setScale(2, BigDecimal.ROUND_CEILING);
 //        energy = mass*height*GRAVITATIONAL_CONSTANT;
 //        energy = an.doubleValue();
 //        System.out.println("mass "+mass+" height "+ height);
 
-        BigDecimal format = new BigDecimal("0.00");
 //        BigDecimal add = format.subtract(new BigDecimal(mass*height+""));
 //        System.out.println(add);
         switch (rnd.nextInt(2)){
@@ -58,10 +82,18 @@ public class GravitationEnergy {
         }
     }
 
+    /**
+     * To get the question
+     * @return String myQue
+     */
     public String getQuestion(){
         return myQue;
     }
 
+    /**
+     * To get the answer
+     * @return String the correct answer
+     */
     public String getAnswer(){
         return ans+"";
     }

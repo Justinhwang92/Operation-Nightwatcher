@@ -3,26 +3,58 @@ package Operation_Nightwatcher.Activity.ProblemClasses;
 import java.math.BigDecimal;
 import java.util.Random;
 
+/**
+ * Physics Question class
+ * Generates one dimensional Kinematics related question
+ */
 public class AccelerationQuestion extends AbstractQuestions{
 
+    // intern folder
     //One Dimensional Kinematics _ horizontal motion pdf
     //question 3
 
+    /**
+     * Random generator to generate random int values.
+     */
     Random rnd;
+
+    /**
+     * String to store current question
+     */
+    private String myQue;
+
+    /**
+     * BigDecimal value to store correct answer in 2 decimal points
+     */
+    private BigDecimal ans;
+
+    /**
+     * speed: int value to store the speed of the object
+     * acceleration : int to store acceleration of the object
+     * time_interval : int to define time will be taken by object
+     */
     int speed, acceleration, time_interval;
-    String myQue;
 
-    //variables to generate answer
+    /**
+     * variables to generate answer
+     * int value
+     */
     int newTime;
-    BigDecimal ans;
 
 
+    /**
+     * Constructor to initialize the random object
+     */
     public AccelerationQuestion(){
         rnd = new Random();
         generateQuestion();
     }
 
-    public void generateQuestion(){
+    /**
+     * Private method to generate random values for the different variables
+     * Generates question and correct answer
+     */
+    private void generateQuestion(){
 //        speed = (rnd.nextInt(5)+1)*10;
         acceleration = (rnd.nextInt(5)+1)*(-1);
         time_interval = (rnd.nextInt(6)+1)*10;
@@ -49,11 +81,19 @@ public class AccelerationQuestion extends AbstractQuestions{
         System.out.println("answer is ; "+ans);
     }
 
+    /**
+     * To get the question
+     * @return String myQue
+     */
     @Override
     public String getQuestion() {
         return myQue;
     }
 
+    /**
+     * To get the answer
+     * @return String the correct answer
+     */
     @Override
     public String getAnswer() {
         return ans.toString();
