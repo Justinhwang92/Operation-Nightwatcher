@@ -47,6 +47,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     implementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'com.google.firebase:firebase-database:19.6.0'
     testImplementation 'junit:junit:4.+'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter'

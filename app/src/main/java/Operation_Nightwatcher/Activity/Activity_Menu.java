@@ -24,18 +24,19 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
         Button playButton = findViewById(R.id.playButton);
         Button instructionButton = findViewById(R.id.instructionButton);
         Button tdgamesButton = findViewById(R.id.tdgamesButton);
-
+        Button highScoreButton = findViewById(R.id.highScoreButton);
         // Attach the click listener to the buttons
         playButton.setOnClickListener(this);
         instructionButton.setOnClickListener(this);
         tdgamesButton.setOnClickListener(this);
+        highScoreButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         Intent i = new Intent(this, Activity_SignIn.class);
         Intent j = new Intent(this, Activity_Instruction.class);
-
+        Intent k = new Intent(this, Activity_High_Scores.class);
         switch (view.getId()) {
             case R.id.playButton:
                 startActivity(i);
@@ -43,6 +44,10 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.instructionButton:
                 startActivity(j);
+                finish();
+                break;
+            case R.id.highScoreButton:
+                startActivity(k);
                 finish();
                 break;
             case R.id.tdgamesButton:
