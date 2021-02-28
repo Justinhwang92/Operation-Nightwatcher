@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.td.OperationNightwatcher.R;
 
+import Operation_Nightwatcher.Game.Calculator;
+
 public class Activity_Menu extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -20,15 +22,15 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_menu);
 
         // Initialize textViews and buttons
-        TextView tittle = findViewById(R.id.title);
+        TextView title = findViewById(R.id.title);
         Button playButton = findViewById(R.id.playButton);
         Button instructionButton = findViewById(R.id.instructionButton);
-        Button tdgamesButton = findViewById(R.id.tdgamesButton);
+        Button tdGamesButton = findViewById(R.id.tdgamesButton);
         Button highScoreButton = findViewById(R.id.highScoreButton);
         // Attach the click listener to the buttons
         playButton.setOnClickListener(this);
         instructionButton.setOnClickListener(this);
-        tdgamesButton.setOnClickListener(this);
+        tdGamesButton.setOnClickListener(this);
         highScoreButton.setOnClickListener(this);
     }
 
