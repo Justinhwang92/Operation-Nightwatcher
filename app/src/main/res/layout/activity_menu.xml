@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient">
 
+    <Button
+            android:id="@+id/highScoreButton"
+            style="@style/ButtonStyle"
+            android:text="High Scores"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/instructionButton"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/title"
         style="@style/TittleStyle"
@@ -17,31 +29,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/playButton"
-        style="@style/ButtonStyle"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:text="Play Now"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+            android:id="@+id/playButton"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="8dp"
+            android:text="Play Now"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            android:layout_height="54dp"
+            android:layout_width="206dp" />
 
     <Button
-        android:id="@+id/instructionButton"
-        style="@style/ButtonStyle"
-        android:text="Instruction"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playButton" />
+            android:id="@+id/instructionButton"
+            style="@style/ButtonStyle"
+            android:text="Instruction"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playButton"
+            android:layout_height="58dp"
+            android:layout_width="255dp" />
 
     <Button
-        android:id="@+id/tdgamesButton"
-        style="@style/ButtonStyle"
-        android:text="TD Games"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructionButton" />
+            android:id="@+id/tdgamesButton"
+            style="@style/ButtonStyle"
+            android:text="TD Games"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/instructionButton"
+            android:layout_marginTop="56dp"
+            app:layout_constraintHorizontal_bias="0.502" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
