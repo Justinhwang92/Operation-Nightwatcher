@@ -1,4 +1,4 @@
-package Operation_Nightwatcher.Activity.ProblemClasses.Test;
+    package Operation_Nightwatcher.Activity.ProblemClasses.Test;
 
 import android.opengl.EGLImage;
 
@@ -6,6 +6,7 @@ import Operation_Nightwatcher.Activity.ProblemClasses.AccelerationQuestion;
 import Operation_Nightwatcher.Activity.ProblemClasses.EquationsofMotion;
 import Operation_Nightwatcher.Activity.ProblemClasses.FrictionProblems;
 import Operation_Nightwatcher.Activity.ProblemClasses.GravitationEnergy;
+import Operation_Nightwatcher.Activity.ProblemClasses.Integration;
 import Operation_Nightwatcher.Activity.ProblemClasses.KineticEnergy;
 import Operation_Nightwatcher.Activity.ProblemClasses.MagneticField;
 import Operation_Nightwatcher.Activity.ProblemClasses.QuadraticEquation;
@@ -48,6 +49,9 @@ class AbstractQuestionsTest {
         System.out.println(mg.getQuestion());
         System.out.println(mg.getAnswer());
 
+        Integration ai = new Integration();
+        System.out.println(ai.getQuestion());
+        System.out.println(ai.getAnswer());
     }
 
     @org.junit.jupiter.api.Test
