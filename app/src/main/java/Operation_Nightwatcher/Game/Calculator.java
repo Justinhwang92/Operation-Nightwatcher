@@ -12,24 +12,25 @@ import java.util.Stack;
 //e
 
 /*
-
  * negative sign: _
  * trig functions: sin = S, cos = C, tan = T
  * inverse trig functions: sin^-1 = s, cos^-1 = c, tan^-1 = t
- * pi = p, e = e
+ * pi = P, e = E
  * ln = L
  */
+
 //for the dropdown calculator in the game
 public class Calculator {
     //list of operations
     public final String myOps = "*-/+^";
     //list of trig functions
-    public final String myTrigs = "SCTsct";
+    public final String myFuncs = "SCTsctL";
+    //list of operands
+    public final String myOperands = "0123456789PE";
     //the converted input string
     private String myInput;
     //for storing the previous answer calculated
     private BigDecimal myPrevious;
-
     //constructs the calculator object
     public Calculator(String theInput)
     {
@@ -56,10 +57,17 @@ public class Calculator {
 
         BigDecimal answer = new BigDecimal(0);
 
+        Stack<String> operators = new Stack<>();
+        Stack<String> operands = new Stack<>();
+
         //calculation here:
         try
         {
-            //use tree
+            for(int i = 0; i < calculateString.length(); i++)
+            {
+                //infix to postfix algorithm
+
+            }
         }
         catch (StackOverflowError o)
         {
