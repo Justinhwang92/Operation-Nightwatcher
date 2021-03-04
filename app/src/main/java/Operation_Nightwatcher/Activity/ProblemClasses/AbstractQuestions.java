@@ -1,11 +1,13 @@
 package Operation_Nightwatcher.Activity.ProblemClasses;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 /**
- * Abstract class and parent class of all possible physics/math questions
+ * A class and parent class of all possible physics/math questions
  */
-public abstract class AbstractQuestions {
+public class AbstractQuestions {
+
 
     /**
      * String variable to store the current question
@@ -16,6 +18,10 @@ public abstract class AbstractQuestions {
      */
     String myAnswer;
 
+    public AbstractQuestions(){
+        generateQuestionChoice();
+    }
+
     /**
      * Format specifier to round down the large decimal points into two.
      */
@@ -25,18 +31,86 @@ public abstract class AbstractQuestions {
      * to get question
      * @return string myQuestion
      */
-    public abstract String getQuestion();
+    public String getQuestion(){
+        return myQuestion;
+    }
 
     /**
      * to get correct answer
      * @return String current answer
      */
-    public abstract String getAnswer();
+    public String getAnswer(){
+        return myAnswer;
+    }
 
     /**
      * To randomly generate questions - will create objects of its child classes
      */
-    public void getQuestions(){
+    public void generateQuestionChoice(){
+
+        Random rnd = new Random();
+        int c = rnd.nextInt(9);
+
+        switch (c) {
+
+            case 0:
+              EquationsofMotion que = new EquationsofMotion();
+              myQuestion = que.getQuestion();
+              myAnswer = que.getAnswer();
+              break;
+
+            case 1:
+                KineticEnergy ke = new KineticEnergy();
+                myQuestion = ke.getQuestion();
+                myAnswer = ke.getAnswer();
+                break;
+
+            case 2:
+                GravitationEnergy ge = new GravitationEnergy();
+                myQuestion = ge.getQuestion();
+                myAnswer = ge.getAnswer();
+                break;
+
+            case 3:
+                FrictionProblems fr = new FrictionProblems();
+                myQuestion = fr.getQuestion();
+                myAnswer = fr.getAnswer();
+                break;
+
+            case 4:
+                QuadraticEquation qe = new QuadraticEquation();
+                myQuestion = qe.getQuestion();
+                myAnswer = qe.getAnswer();
+                break;
+
+            case 5:
+                AccelerationQuestion aq = new AccelerationQuestion();
+                myQuestion = aq.getQuestion();
+                myAnswer = aq.getAnswer();
+                break;
+
+            case 6:
+            //needs to work on negative value generated for asnwer
+                WorkDoneQuestions wd = new WorkDoneQuestions();
+                myQuestion = wd.getQuestion();
+                myAnswer = wd.getAnswer();
+                break;
+
+            case 7:
+                MagneticField mg = new MagneticField();
+                myQuestion = mg.getQuestion();
+                myAnswer = mg.getAnswer();
+                break;
+
+            case 8:
+                Integration ai = new Integration();
+                myQuestion = ai.getQuestion();
+                myAnswer = ai.getAnswer();
+                break;
+
+            default:
+                break;
+        }
 
     }
 }

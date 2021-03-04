@@ -3,7 +3,7 @@ package Operation_Nightwatcher.Activity.ProblemClasses;
 import java.math.BigDecimal;
 import java.util.Random;
 
-public class GravitationEnergy {
+public class GravitationEnergy extends AbstractQuestions{
 
     private double GRAVITATIONAL_CONSTANT = 9.8;
 
