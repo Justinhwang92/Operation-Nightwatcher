@@ -52,7 +52,7 @@ public class Activity_SignIn extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_SignIn.this, Activity_Room.class);
+                Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
                 startActivity(intent);
             }
         });
