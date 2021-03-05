@@ -11,26 +11,16 @@ import java.util.Stack;
 //pi
 //e
 
-/*
- * negative sign: _
- * trig functions: sin = S, cos = C, tan = T
- * inverse trig functions: sin^-1 = s, cos^-1 = c, tan^-1 = t
- * pi = P, e = E
- * ln = L
- */
 
 //for the dropdown calculator in the game
 public class Calculator {
     //list of operations
     public final String myOps = "*-/+^";
-    //list of trig functions
-    public final String myFuncs = "SCTsctL";
-    //list of operands
-    public final String myOperands = "0123456789PE";
     //the converted input string
     private String myInput;
     //for storing the previous answer calculated
     private BigDecimal myPrevious;
+
     //constructs the calculator object
     public Calculator(String theInput)
     {
@@ -57,30 +47,298 @@ public class Calculator {
 
         BigDecimal answer = new BigDecimal(0);
 
-        Stack<String> operators = new Stack<>();
-        Stack<String> operands = new Stack<>();
+        //make a tree
+        //steps:
+        //simplify trig expressions
+        //Read characters left to right
+        //if operand, read operator and another operand (operand could be parenthetical expression)
+        //if character after operand is parentheses, multiply is the sign
+        //parentheses = recursion of performOperation
+        //1st run through - make nodes
+        //
 
-        //calculation here:
         try
         {
-            for(int i = 0; i < calculateString.length(); i++)
-            {
-                //infix to postfix algorithm
-
-            }
+            answer = eval(calculateString);
         }
-        catch (StackOverflowError o)
+        catch(StackOverflowError e)
         {
-
+            displayErrorMessage(new Exception("Out of memory"));
         }
         catch(Exception e)
         {
             displayErrorMessage(new Exception("Error"));
         }
-
         myPrevious = answer;
-        return null;
+        return answer;
     }
+
+    public static BigDecimal eval(final String str) {
+        return new Object() {
+            int pos = -1, ch;
+
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
+
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            BigDecimal parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                return new BigDecimal(x);
+            }
+
+            // Grammar:
+            // expression = term | expression `+` term | expression `-` term
+            // term = factor | term `*` factor | term `/` factor
+            // factor = `+` factor | `-` factor | `(` expression `)`
+            //        | number | functionName factor | factor `^` factor
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if      (eat('+')) x += parseTerm(); // addition
+                    else if (eat('-')) x -= parseTerm(); // subtraction
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if      (eat('*')) x *= parseFactor(); // multiplication
+                    else if (eat('/')) x /= parseFactor(); // division
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return parseFactor(); // unary plus
+                if (eat('-')) return -parseFactor(); // unary minus
+
+                double x;
+                int startPos = this.pos;
+                if (eat('(')) { // parentheses
+                    x = parseExpression();
+                    eat(')');
+                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else if (ch >= 'a' && ch <= 'z') { // functions
+                    while (ch >= 'a' && ch <= 'z') nextChar();
+                    String func = str.substring(startPos, this.pos);
+                    x = parseFactor();
+                    if (func.equals("sqrt")) x = Math.sqrt(x);
+                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
+                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
+                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                    else if (func.equals("asin")) x = Math.asin(Math.toRadians(x));
+                    else if (func.equals("acos")) x = Math.acos(Math.toRadians(x));
+                    else if (func.equals("atan")) x = Math.atan(Math.toRadians(x));
+                    else if (func.equals("ln")) x = Math.log(x);
+                    else if (func.equals("pi")) x = Math.PI;
+                    else if (func.equals("e")) x = Math.E;
+                    else throw new RuntimeException("Unknown function: " + func);
+                } else {
+                    throw new RuntimeException("Unexpected: " + (char)ch);
+                }
+
+                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
+
+                return x;
+            }
+        }.parse();
+    }
+
+
+//                PREVIOUS SOLUTION -- INCOMPLETE
+//    //calculation here:
+//        try
+//    {
+//        /*************************INFIX TO POSTFIX******************************************/
+//        Stack<String> postfix = new Stack<>();
+//        Stack<String> operators = new Stack<>();
+//        StringBuilder operand = new StringBuilder();
+//
+//        for(int i = 0; i < calculateString.length(); i++)
+//        {
+//            //infix to postfix algorithm
+//            String current = String.valueOf(calculateString.charAt(i));
+//            //if it is an operand, push it (numbers)
+//            if(!(myOps.contains(current) || myFuncs.contains(current)))
+//            {
+//                operand.append(current);
+//            }
+//
+//            else
+//            {
+//                //current character is an operator or function, so our operand is done
+//                //push it to the postfix stack
+//                postfix.push(operand.toString());
+//                //reset the operand string builder
+//                operand = new StringBuilder();
+//                if(current == ")" || i == calculateString.length() - 1)
+//                {
+//                    //expression is to build a string to represent the inside of the parentheses
+//                    StringBuilder expression = new StringBuilder("(");
+//                    while(operators.peek() != "(")
+//                    {
+//                        expression.append(operators.pop());
+//                    }
+//                    operators.pop(); //discard left parentheses
+//                    expression.append(")");
+//                    //check if next character is a function character
+//                    if(!operators.isEmpty())
+//                    {
+//                        String nextOperator = operators.peek();
+//                        if(myFuncs.contains(nextOperator))
+//                        {
+//                            //insert function character at beginning of expression
+//                            expression.insert(0, operators.pop());
+//                        }
+//                    }
+//
+//                    postfix.push(expression.toString());
+//                }
+//
+//                else
+//                {
+//                    //push based on precedence
+//                    if(firstPriority.contains(current) || operators.contains("("))
+//                    {
+//                        operators.push(current);
+//                    }
+//
+//                    else if(secondPriority.contains(current))
+//                    {
+//                        boolean flag = false;
+//                        for(String s : operators)
+//                        {
+//                            if(firstPriority.contains(s))
+//                            {
+//                                flag = true;
+//                                break;
+//                            }
+//                        }
+//
+//                        if(flag)
+//                        {
+//                            Stack<String> higherPriority = new Stack<>();
+//                            while(operators.peek() != "(")
+//                            {
+//                                higherPriority.push(operators.pop());
+//                            }
+//                            operators.push(current);
+//                            while(!higherPriority.isEmpty())
+//                            {
+//                                operators.push(higherPriority.pop());
+//                            }
+//                        }
+//
+//                        else
+//                        {
+//                            operators.push(current);
+//                        }
+//                    }
+//
+//                    else
+//                    {
+//                        boolean flag = false;
+//                        for(String s : operators)
+//                        {
+//                            if(firstPriority.contains(s) || secondPriority.contains(s))
+//                            {
+//                                flag = true;
+//                                break;
+//                            }
+//                        }
+//
+//                        if(flag)
+//                        {
+//                            Stack<String> higherPriority = new Stack<>();
+//                            while(operators.peek() != "(")
+//                            {
+//                                higherPriority.push(operators.pop());
+//                            }
+//                            operators.push(current);
+//                            while(!higherPriority.isEmpty())
+//                            {
+//                                operators.push(higherPriority.pop());
+//                            }
+//                        }
+//
+//                        else
+//                        {
+//                            operators.push(current);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        //check is operators stack is empty: pop all the parentheses
+//        while(!operators.isEmpty())
+//        {
+//            if(operators.contains("("))
+//            {
+//                StringBuilder expression = new StringBuilder("(");
+//                while(operators.peek() != "(")
+//                {
+//                    expression.append(operators.pop());
+//                }
+//                operators.pop(); //discard left parentheses
+//                expression.append(")");
+//                //check if next character is a function character
+//                if(!operators.isEmpty())
+//                {
+//                    String nextOperator = operators.peek();
+//                    if(myFuncs.contains(nextOperator))
+//                    {
+//                        //insert function character at beginning of expression
+//                        expression.insert(0, operators.pop());
+//                    }
+//                }
+//                postfix.push(expression.toString());
+//            }
+//
+//            else
+//            {
+//                postfix.push(operators.pop());
+//            }
+//        }
+//        /*************************END INFIX TO POSTFIX******************************************/
+//        /*************************CALCULATE POSTFIX******************************************/
+//
+//        Stack<String> postfixOperands = new Stack<>();
+//        Stack<String> postFixOperators = new Stack<>();
+//        while(!postfix.isEmpty())
+//        {
+//            String operand1 = postfix.pop();
+//            String operand2 = postfix.pop();
+//
+//            if(operand1.contains("(") || operand2.contains("("))
+//            {
+//                //have to multiply or
+//            }
+//        }
+//    }
+//        catch (StackOverflowError o)
+//    {
+//        displayErrorMessage(new Exception("Overflow error"));
+//    }
+//        catch(Exception e)
+//    {
+//        displayErrorMessage(new Exception("Error"));
+//    }
 
     //checks if the input string is valid
     public Exception checkValidity(String theInput)
@@ -95,6 +353,10 @@ public class Calculator {
             return new Exception("Invalid operator syntax");
         }
 
+        if(!checkFunctions(theInput))
+        {
+            return new Exception("Please surround function parameters without parentheses");
+        }
         return null;
     }
 
@@ -180,11 +442,31 @@ public class Calculator {
         return true;
     }
 
+    //checks if each function has parentheses after it
+    public boolean checkFunctions(String theInput)
+    {
+        for(int i = 0; i < theInput.length(); i++)
+        {
+            if(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+            {
+                while(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+                {
+                    i++;
+                }
+                if(theInput.charAt(i) != '(')
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     //displays an error message depending on what error occurred
     public void displayErrorMessage(Exception theException)
     {
         //stand-in error message; need to implement the error in the calculator GUI
-        System.out.println("Invalid calculator input");
+        System.out.println(theException.getMessage());
     }
 
 
@@ -209,4 +491,5 @@ public class Calculator {
     public void setMyInput(String theInput) {
         myInput = theInput;
     }
+
 }
