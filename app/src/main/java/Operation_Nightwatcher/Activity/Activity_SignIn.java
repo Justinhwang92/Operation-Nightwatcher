@@ -2,6 +2,7 @@ package Operation_Nightwatcher.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import com.td.OperationNightwatcher.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +36,7 @@ public class Activity_SignIn extends AppCompatActivity {
     public static final int MEDIA_TYPE_IMAGE = 2;
 
     private Uri mMediaUri;
+    private ImageView img_profile;
 
 
     @Override
@@ -45,8 +48,8 @@ public class Activity_SignIn extends AppCompatActivity {
         // Initialize textView and button
         EditText userName = findViewById(R.id.userName);
         Button okButton = findViewById(R.id.okButton);
-        ImageView img_profile = findViewById(R.id.img_profile);
         ImageView img_plus = findViewById(R.id.img_plus);
+        img_profile = findViewById(R.id.img_profile);
 
         // Attach the click listener to the buttons
         okButton.setOnClickListener(new View.OnClickListener(){
@@ -92,15 +95,27 @@ public class Activity_SignIn extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                try{
-                    final InputStream imageStream = getContentResolver().openInputStream(mMediaUri); ;
-                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    img_profile.setImageBitmap(selectedImage);
-                } catch (FileNotFoundException e){
-                    e.printStackTrace();
-                }
             }
+
         });
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                img_profile.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+        }
     }
 
 
