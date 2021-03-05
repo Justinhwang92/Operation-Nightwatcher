@@ -84,7 +84,7 @@ public class MagneticField extends AbstractQuestions{
 
         magnetic_field = new BigDecimal(current/(2*Math.PI*radius)).setScale(2, BigDecimal.ROUND_CEILING);
 
-        System.out.println(magnetic_field);
+        //System.out.println(magnetic_field);
 
         //testing purpose
 //        magnetic_field = new BigDecimal(2);

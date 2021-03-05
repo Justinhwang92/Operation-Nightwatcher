@@ -56,6 +56,7 @@ class AbstractQuestionsTest {
 //        System.out.println(ai.getAnswer());
 
         AbstractQuestions ab = new AbstractQuestions();
+        ab.generateQuestionChoice();
         System.out.println(ab.getQuestion());
         System.out.println(ab.getAnswer());
 

@@ -71,14 +71,14 @@ public class AccelerationQuestion extends AbstractQuestions{
                 "as long as the train is in motion. How far does the train move during a "+time_interval+"-s time interval " +
                 "starting at the instant the brakes are applied?";
 
-        System.out.println(myQue);
+//        System.out.println(myQue);
 
         newTime = (-speed)/acceleration;
 
         double temp = speed*newTime + (acceleration*(newTime*newTime))/2.0 ;
         ans = new BigDecimal(temp+"").setScale(2, BigDecimal.ROUND_CEILING);
 
-        System.out.println("answer is ; "+ans);
+//        System.out.println("answer is ; "+ans);
     }
 
     /**

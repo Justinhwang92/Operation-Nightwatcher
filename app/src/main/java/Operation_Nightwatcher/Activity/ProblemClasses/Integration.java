@@ -1,5 +1,6 @@
 package Operation_Nightwatcher.Activity.ProblemClasses;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public class Integration extends AbstractQuestions {
@@ -24,7 +25,8 @@ public class Integration extends AbstractQuestions {
 //        System.out.println("\u222B "+ function.currentQuest +" Integral is: " + result);
 
         myQue = "Find \u222B " + function.currentQuest + "\nwhere upper limit = "+upper+" and lower limit = "+lower;
-        ans = result+"";
+//        ans = result+"";
+        ans = new BigDecimal(result+"").setScale(BigDecimal.ROUND_CEILING, 2).toString();
     }
 
 

@@ -19,13 +19,13 @@ public class AbstractQuestions {
     String myAnswer;
 
     public AbstractQuestions(){
-        generateQuestionChoice();
+
     }
 
     /**
      * Format specifier to round down the large decimal points into two.
      */
-    protected BigDecimal format = new BigDecimal("0.00");
+//    protected BigDecimal format = new BigDecimal("0.00");
 
     /**
      * to get question
@@ -50,11 +50,12 @@ public class AbstractQuestions {
 
         Random rnd = new Random();
         int c = rnd.nextInt(9);
-
+        System.out.println("choice : "+c+"\n");
+//    c=8;
         switch (c) {
 
             case 0:
-              EquationsofMotion que = new EquationsofMotion();
+                EquationsofMotion que = new EquationsofMotion();
               myQuestion = que.getQuestion();
               myAnswer = que.getAnswer();
               break;

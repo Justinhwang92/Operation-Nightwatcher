@@ -52,8 +52,8 @@ public class FrictionProblems extends AbstractQuestions {
         force_static = (rnd.nextInt(10)+1)*10;
         force_friction = (rnd.nextInt(10)+1)*10;
 
-        mu_s = ((new BigDecimal(weighing/force_static)).subtract((super.format))).setScale(2, BigDecimal.ROUND_CEILING);
-        mu_k = ((super.format).add(new BigDecimal(weighing/force_friction))).setScale(2, BigDecimal.ROUND_CEILING);
+        mu_s = ((new BigDecimal(weighing/force_static))).setScale(2, BigDecimal.ROUND_CEILING);
+        mu_k = (new BigDecimal(weighing/force_friction)).setScale(2, BigDecimal.ROUND_CEILING);
 //        System.out.println(""+ weighing +" "+ force_static +" "+force_friction +" "+mu_s+ " " + mu_k);
 
         myQue = "A block weighing "+ weighing + " N is pushed along a surface. If it takes "+ force_static +" N to get the block moving and "
