@@ -36,9 +36,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/baseline_account_circle_black_48"
-                    app:civ_border_color="@android:color/white"
-                    app:civ_border_width="2dp" />
+                    android:src="@drawable/baseline_account_circle_black_48" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/img_plus"
@@ -46,9 +44,7 @@
                     android:layout_height="@dimen/_28sdp"
                     android:layout_alignBottom="@id/img_profile"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_plus"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="1" />
+                    android:src="@drawable/ic_plus" />
             </RelativeLayout>
 
             <EditText
