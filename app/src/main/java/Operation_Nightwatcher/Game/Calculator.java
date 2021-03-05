@@ -47,16 +47,6 @@ public class Calculator {
 
         BigDecimal answer = new BigDecimal(0);
 
-        //make a tree
-        //steps:
-        //simplify trig expressions
-        //Read characters left to right
-        //if operand, read operator and another operand (operand could be parenthetical expression)
-        //if character after operand is parentheses, multiply is the sign
-        //parentheses = recursion of performOperation
-        //1st run through - make nodes
-        //
-
         try
         {
             answer = eval(calculateString);
@@ -158,6 +148,159 @@ public class Calculator {
             }
         }.parse();
     }
+
+    //checks if the input string is valid
+    public Exception checkValidity(String theInput)
+    {
+        if(!checkParentheses(theInput))
+        {
+            return new Exception("Invalid parentheses syntax");
+        }
+
+        if(!checkOperators(theInput))
+        {
+            return new Exception("Invalid operator syntax");
+        }
+
+        if(!checkFunctions(theInput))
+        {
+            return new Exception("Please surround function parameters without parentheses");
+        }
+        return null;
+    }
+
+    //checks if all closing parentheses have a matching open parenthesis
+    //also checks if any open parentheses don't have any arguments
+    public boolean checkParentheses(String theInput)
+    {
+        if(theInput.charAt(0) == ')')
+        {
+            return false;
+        }
+
+        if(theInput.charAt(theInput.length() - 1) == '(')
+        {
+            return false;
+        }
+
+        for(int i = 0; i < theInput.length(); i++)
+        {
+            if(theInput.charAt(i) == '(')
+            {
+                if(theInput.charAt(i + 1) == ')')
+                {
+                    return false;
+                }
+            }
+        }
+
+        Stack<Character> closedParentheses = new Stack<>();
+
+        for(int i = 0; i < theInput.length(); i++)
+        {
+            if(theInput.charAt(i) == ')')
+            {
+                closedParentheses.push(theInput.charAt(i));
+            }
+
+            if(theInput.charAt(i) == '(')
+            {
+                closedParentheses.pop();
+            }
+        }
+
+        return closedParentheses.isEmpty();
+    }
+
+    //checks to see if there are 2 operators in a row or improperly positioned
+    //also checks to see if negative signs are properly positioned
+    public boolean checkOperators(String theInput)
+    {
+        if(myOps.contains(String.valueOf(theInput.charAt(0))) ||
+                myOps.contains(String.valueOf(theInput.charAt(theInput.length() - 1))))
+        {
+            return false;
+        }
+
+        //calculator will build input string by using '_' as negative sign
+        if(theInput.charAt(theInput.length() - 1) == '_')
+        {
+            return false;
+        }
+
+        for(int i = 1; i < theInput.length() - 1; i++)
+        {
+            if(theInput.charAt(i) == '_')
+            {
+                if(!myOps.contains(String.valueOf(theInput.charAt(i - 1))))
+                {
+                    return false;
+                }
+            }
+
+            if(myOps.contains(String.valueOf(theInput.charAt(i))))
+            {
+                if(myOps.contains(String.valueOf(theInput.charAt(i - 1))) ||
+                        myOps.contains(String.valueOf(theInput.charAt(i + 1))))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    //checks if each function has parentheses after it
+    public boolean checkFunctions(String theInput)
+    {
+        for(int i = 0; i < theInput.length(); i++)
+        {
+            if(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+            {
+                while(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+                {
+                    i++;
+                }
+                if(theInput.charAt(i) != '(')
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //displays an error message depending on what error occurred
+    public void displayErrorMessage(Exception theException)
+    {
+        //stand-in error message; need to implement the error in the calculator GUI
+        System.out.println(theException.getMessage());
+    }
+
+
+    //to change the previous answer
+    public void setMyPrevious(BigDecimal thePrevious)
+    {
+        myPrevious = thePrevious;
+    }
+
+    //to return the previous answer
+    public BigDecimal getMyPrevious()
+    {
+        return myPrevious;
+    }
+
+    //gets input string
+    public String getMyInput() {
+        return myInput;
+    }
+
+    //sets input string
+    public void setMyInput(String theInput) {
+        myInput = theInput;
+    }
+
 
 
 //                PREVIOUS SOLUTION -- INCOMPLETE
@@ -339,157 +482,14 @@ public class Calculator {
 //    {
 //        displayErrorMessage(new Exception("Error"));
 //    }
-
-    //checks if the input string is valid
-    public Exception checkValidity(String theInput)
-    {
-        if(!checkParentheses(theInput))
-        {
-            return new Exception("Invalid parentheses syntax");
-        }
-
-        if(!checkOperators(theInput))
-        {
-            return new Exception("Invalid operator syntax");
-        }
-
-        if(!checkFunctions(theInput))
-        {
-            return new Exception("Please surround function parameters without parentheses");
-        }
-        return null;
-    }
-
-    //checks if all closing parentheses have a matching open parenthesis
-    //also checks if any open parentheses don't have any arguments
-    public boolean checkParentheses(String theInput)
-    {
-        if(theInput.charAt(0) == ')')
-        {
-            return false;
-        }
-
-        if(theInput.charAt(theInput.length() - 1) == '(')
-        {
-            return false;
-        }
-
-        for(int i = 0; i < theInput.length(); i++)
-        {
-            if(theInput.charAt(i) == '(')
-            {
-                if(theInput.charAt(i + 1) == ')')
-                {
-                    return false;
-                }
-            }
-        }
-
-        Stack<Character> closedParentheses = new Stack<>();
-
-        for(int i = 0; i < theInput.length(); i++)
-        {
-            if(theInput.charAt(i) == ')')
-            {
-                closedParentheses.push(theInput.charAt(i));
-            }
-
-            if(theInput.charAt(i) == '(')
-            {
-                closedParentheses.pop();
-            }
-        }
-
-        return closedParentheses.isEmpty();
-    }
-
-    //checks to see if there are 2 operators in a row or improperly positioned
-    //also checks to see if negative signs are properly positioned
-    public boolean checkOperators(String theInput)
-    {
-        if(myOps.contains(String.valueOf(theInput.charAt(0))) ||
-                myOps.contains(String.valueOf(theInput.charAt(theInput.length() - 1))))
-        {
-            return false;
-        }
-
-        //calculator will build input string by using '_' as negative sign
-        if(theInput.charAt(theInput.length() - 1) == '_')
-        {
-            return false;
-        }
-
-        for(int i = 1; i < theInput.length() - 1; i++)
-        {
-            if(theInput.charAt(i) == '_')
-            {
-                if(!myOps.contains(String.valueOf(theInput.charAt(i - 1))))
-                {
-                    return false;
-                }
-            }
-
-            if(myOps.contains(String.valueOf(theInput.charAt(i))))
-            {
-                if(myOps.contains(String.valueOf(theInput.charAt(i - 1))) ||
-                        myOps.contains(String.valueOf(theInput.charAt(i + 1))))
-                {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    //checks if each function has parentheses after it
-    public boolean checkFunctions(String theInput)
-    {
-        for(int i = 0; i < theInput.length(); i++)
-        {
-            if(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
-            {
-                while(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
-                {
-                    i++;
-                }
-                if(theInput.charAt(i) != '(')
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    //displays an error message depending on what error occurred
-    public void displayErrorMessage(Exception theException)
-    {
-        //stand-in error message; need to implement the error in the calculator GUI
-        System.out.println(theException.getMessage());
-    }
-
-
-    //to change the previous answer
-    public void setMyPrevious(BigDecimal thePrevious)
-    {
-        myPrevious = thePrevious;
-    }
-
-    //to return the previous answer
-    public BigDecimal getMyPrevious()
-    {
-        return myPrevious;
-    }
-
-    //gets input string
-    public String getMyInput() {
-        return myInput;
-    }
-
-    //sets input string
-    public void setMyInput(String theInput) {
-        myInput = theInput;
-    }
-
+    //another idea:
+    //make a tree
+    //steps:
+    //simplify trig expressions
+    //Read characters left to right
+    //if operand, read operator and another operand (operand could be parenthetical expression)
+    //if character after operand is parentheses, multiply is the sign
+    //parentheses = recursion of performOperation
+    //1st run through - make nodes
+    //
 }
