@@ -38,7 +38,6 @@ public class Activity_SignIn extends AppCompatActivity {
     private Uri mMediaUri;
     private ImageView img_profile;
 
-
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,24 +111,21 @@ public class Activity_SignIn extends AppCompatActivity {
                 img_profile.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Sorry there was an error! Try again.", Toast.LENGTH_LONG).show();
             }
-
-        }else {
+        } else {
+            Toast.makeText(getApplicationContext(), "You haven't picked Image.", Toast.LENGTH_LONG).show();
         }
     }
 
-
     private Uri getOutputMediaFileUri(int mediaTypeImage) {
-
         if (isExternalStorageAvailable()) {
-            //get the URI
-            //get external storage dir
+            //get the URI, external storage dir
             File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "UPLOADIMAGES");
             //create subdirectore if it does not exist
             if (!mediaStorageDir.exists()) {
                 //create dir
                 if (!mediaStorageDir.mkdirs()) {
-
                     return null;
                 }
             }
@@ -145,10 +141,8 @@ public class Activity_SignIn extends AppCompatActivity {
             }
             //return file uri
             Log.d("UPLOADIMAGE", "FILE: " + Uri.fromFile(mediaFile));
-
             return Uri.fromFile(mediaFile);
         } else {
-
             return null;
         }
     }
@@ -162,7 +156,6 @@ public class Activity_SignIn extends AppCompatActivity {
             return false;
         }
     }
-
 
     @Override
     protected void onStop(){
