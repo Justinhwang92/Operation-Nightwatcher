@@ -31,7 +31,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -52,7 +52,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -95,7 +95,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calcLn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -160,7 +160,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calcPi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -181,7 +181,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calcSin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -308,7 +308,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -371,7 +371,7 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -566,6 +566,48 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+        android:id="@+id/calcAC"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="AC"
+        android:textSize="25sp"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/calcTimes"
+        app:layout_constraintTop_toBottomOf="@+id/calcCE"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/calcEquals"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:text="="
+        android:textSize="25sp"
+        app:elevation="0dp"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/calc0"
+        app:layout_constraintTop_toBottomOf="@+id/calcAC"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
         android:id="@+id/calcPower"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -588,20 +630,25 @@
 
     <TextView
         android:id="@+id/calcTextView"
-        android:layout_width="200dp"
-        android:layout_height="92dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:background="#B1B1B1"
         android:enabled="false"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text=""
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/calcRightParentheses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

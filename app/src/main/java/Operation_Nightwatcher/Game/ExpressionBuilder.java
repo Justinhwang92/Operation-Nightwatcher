@@ -1,84 +1,20 @@
 package Operation_Nightwatcher.Game;
 
-import android.content.Context;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.td.OperationNightwatcher.R;
 
+import java.math.BigDecimal;
+
+import Operation_Nightwatcher.Activity.Activity_Room;
+
 public class ExpressionBuilder {
 
-    public static Button myCalc0;
-    public static Button myCalc1;
-    public static Button myCalc2;
-    public static Button myCalc3;
-    public static Button myCalc4;
-    public static Button myCalc5;
-    public static Button myCalc6;
-    public static Button myCalc7;
-    public static Button myCalc8;
-    public static Button myCalc9;
-    public static Button myCalcSin;
-    public static Button myCalcCos;
-    public static Button myCalcTan;
-    public static Button myCalcInv;
-    public static Button myCalcLn;
-    public static Button myCalcSqrt;
-    public static Button myCalcPi;
-    public static Button myCalcLP;
-    public static Button myCalcRP;
-    public static Button myCalcE;
-    public static Button myCalcPow;
-    public static Button myCalcPeriod;
-    public static Button myCalcPlus;
-    public static Button myCalcMinus;
-    public static Button myCalcTimes;
-    public static Button myCalcDivide;
-    public static Button myCalcCE;
+    public static Activity_Room  myRoom;
 
-    public static Button[] myButtons =
+    public ExpressionBuilder(Activity_Room theRoom)
     {
-        myCalc0,
-        myCalc1,
-        myCalc2,
-        myCalc3,
-        myCalc4,
-        myCalc5,
-        myCalc6,
-        myCalc7,
-        myCalc8,
-        myCalc9,
-        myCalc0,
-        myCalcSin,
-        myCalcCos,
-        myCalcTan,
-        myCalcInv,
-        myCalcLn,
-        myCalcSqrt,
-        myCalcPi,
-        myCalcLP,
-        myCalcRP,
-        myCalcE,
-        myCalcPow,
-        myCalcPeriod,
-        myCalcPlus,
-        myCalcMinus,
-        myCalcTimes,
-        myCalcDivide,
-        myCalcCE
-    };
-
-    public static TextView myCalcView;
-
-    public ExpressionBuilder(TextView theTextView, Button... theButtons)
-    {
-        for(int i = 0; i < theButtons.length; i++)
-        {
-            myButtons[i] = theButtons[i];
-        }
-
-        myCalcView = theTextView;
+        myRoom = theRoom;
     }
 
     public static boolean myInv = false;
@@ -116,12 +52,14 @@ public class ExpressionBuilder {
             case R.id.calcTimes: updateExpression("*"); break;
             case R.id.calcDivide: updateExpression("/"); break;
             case R.id.calcCE: updateExpression(""); break;
+            case R.id.calcAC: updateExpression("clear"); break;
+            case R.id.calcEquals: updateExpression("equals"); break;
         }
     }
 
-    public static String getExpression()
+    public static void displayError(Exception theException)
     {
-        return myExpression.toString();
+        myRoom.myCalcText.setText(theException.getMessage());
     }
 
     public static void resetExpression()
@@ -129,34 +67,47 @@ public class ExpressionBuilder {
         myExpression = new StringBuilder();
     }
 
-    public static void toggleTrigText()
+    private static void toggleTrigText()
     {
         if(myInv)
         {
-            myCalcSin.setText("sin^-1");
-            myCalcCos.setText("cos^-1");
-            myCalcTan.setText("tan^-1");
+            myRoom.myCalcSin.setText("sin^-1");
+            myRoom.myCalcCos.setText("cos^-1");
+            myRoom.myCalcTan.setText("tan^-1");
         }
 
         else
         {
-            myCalcSin.setText("sin");
-            myCalcCos.setText("cos");
-            myCalcTan.setText("tan");
+            myRoom.myCalcSin.setText("sin");
+            myRoom.myCalcCos.setText("cos");
+            myRoom.myCalcTan.setText("tan");
         }
     }
 
-    public static void updateExpression(String theUpdate)
+    private static void updateExpression(String theUpdate)
     {
-        if(theUpdate == "")
+        BigDecimal calculation = new BigDecimal(0);
+        if(theUpdate.equals(""))
         {
+            if(myExpression.length() > 0)
             myExpression.deleteCharAt(myExpression.length() - 1);
+        }
+        else if(theUpdate.equals("clear"))
+        {
+            resetExpression();
+        }
+        else if(theUpdate.equals("equals"))
+        {
+             calculation = Calculator.calculate(myExpression.toString());
+            if(calculation != null)
+            myExpression = new StringBuilder(Calculator.getMyPrevious().toString());
         }
         else
         {
             myExpression.append(theUpdate);
         }
 
-        myCalcView.setText(myExpression);
+        if(calculation != null)
+        myRoom.myCalcText.setText(myExpression.toString());
     }
 }

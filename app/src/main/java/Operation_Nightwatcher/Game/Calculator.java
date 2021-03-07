@@ -15,31 +15,28 @@ import java.util.Stack;
 //for the dropdown calculator in the game
 public class Calculator {
     //list of operations
-    public final String myOps = "*-/+^";
-    //the converted input string
-    private String myInput;
+    public final static String myOps = "*-/+^";
     //for storing the previous answer calculated
-    private BigDecimal myPrevious;
+    private static BigDecimal myPrevious;
 
     //constructs the calculator object
-    public Calculator(String theInput)
+    public Calculator()
     {
-        myInput = theInput;
         myPrevious = new BigDecimal(0);
     }
 
     //calculates expression given a string input from the calculator GUI
-    public BigDecimal calculate(String theInput)
+    public static BigDecimal calculate(String theInput)
     {
         String calculateString = theInput.replace(" ", "");
-
+        if(calculateString.length() < 1)
+        {
+            return null;
+        }
         //validation:
         Exception error = null;
-        try
-        {
-          error = checkValidity(calculateString);
-        }
-        catch(Exception e)
+        error = checkValidity(calculateString);
+        if(error != null)
         {
             displayErrorMessage(error);
             return null;
@@ -63,7 +60,7 @@ public class Calculator {
         return answer;
     }
 
-    public static BigDecimal eval(final String str) {
+    private static BigDecimal eval(final String str) {
         return new Object() {
             int pos = -1, ch;
 
@@ -150,7 +147,7 @@ public class Calculator {
     }
 
     //checks if the input string is valid
-    public Exception checkValidity(String theInput)
+    private static Exception checkValidity(String theInput)
     {
         if(!checkParentheses(theInput))
         {
@@ -166,12 +163,13 @@ public class Calculator {
         {
             return new Exception("Please surround function parameters without parentheses");
         }
+
         return null;
     }
 
     //checks if all closing parentheses have a matching open parenthesis
     //also checks if any open parentheses don't have any arguments
-    public boolean checkParentheses(String theInput)
+    private static boolean checkParentheses(String theInput)
     {
         if(theInput.charAt(0) == ')')
         {
@@ -195,7 +193,7 @@ public class Calculator {
         }
 
         Stack<Character> closedParentheses = new Stack<>();
-
+        Stack<Character> openParentheses = new Stack<>();
         for(int i = 0; i < theInput.length(); i++)
         {
             if(theInput.charAt(i) == ')')
@@ -205,16 +203,16 @@ public class Calculator {
 
             if(theInput.charAt(i) == '(')
             {
-                closedParentheses.pop();
+                openParentheses.push(theInput.charAt(i));
             }
         }
 
-        return closedParentheses.isEmpty();
+        return closedParentheses.size() <= openParentheses.size();
     }
 
     //checks to see if there are 2 operators in a row or improperly positioned
     //also checks to see if negative signs are properly positioned
-    public boolean checkOperators(String theInput)
+    private static boolean checkOperators(String theInput)
     {
         if(myOps.contains(String.valueOf(theInput.charAt(0))) ||
                 myOps.contains(String.valueOf(theInput.charAt(theInput.length() - 1))))
@@ -252,7 +250,7 @@ public class Calculator {
     }
 
     //checks if each function has parentheses after it
-    public boolean checkFunctions(String theInput)
+    private static boolean checkFunctions(String theInput)
     {
         for(int i = 0; i < theInput.length(); i++)
         {
@@ -261,6 +259,10 @@ public class Calculator {
                 while(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
                 {
                     i++;
+                    if(i >= theInput.length())
+                    {
+                        return false;
+                    }
                 }
                 if(theInput.charAt(i) != '(')
                 {
@@ -272,36 +274,16 @@ public class Calculator {
     }
 
     //displays an error message depending on what error occurred
-    public void displayErrorMessage(Exception theException)
+    private static void displayErrorMessage(Exception theException)
     {
-        //stand-in error message; need to implement the error in the calculator GUI
-        System.out.println(theException.getMessage());
-    }
-
-
-    //to change the previous answer
-    public void setMyPrevious(BigDecimal thePrevious)
-    {
-        myPrevious = thePrevious;
+        ExpressionBuilder.displayError(theException);
     }
 
     //to return the previous answer
-    public BigDecimal getMyPrevious()
+    public static BigDecimal getMyPrevious()
     {
         return myPrevious;
     }
-
-    //gets input string
-    public String getMyInput() {
-        return myInput;
-    }
-
-    //sets input string
-    public void setMyInput(String theInput) {
-        myInput = theInput;
-    }
-
-
 
 //                PREVIOUS SOLUTION -- INCOMPLETE
 //    //calculation here:
