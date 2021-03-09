@@ -7,13 +7,12 @@
     android:background="@drawable/gradient" >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_300sdp"
+        android:layout_width="@dimen/_280sdp"
         android:layout_height="@dimen/_300sdp"
         android:padding="@dimen/_20sdp"
         app:cardCornerRadius="@dimen/_15sdp"
         app:cardElevation="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
