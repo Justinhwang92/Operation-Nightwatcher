@@ -2,18 +2,27 @@ package Operation_Nightwatcher.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 
 import com.td.OperationNightwatcher.R;
 
 import java.util.LinkedList;
 
+import Operation_Nightwatcher.Activity.Database.User;
 import Operation_Nightwatcher.Activity.ProblemClasses.AbstractQuestions;
 import Operation_Nightwatcher.Game.Calculator;
 import Operation_Nightwatcher.Game.ExpressionBuilder;
@@ -24,6 +33,15 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
     String currentQuestion;
     String currentAnswer;
     int currentScore;
+    boolean isCalcOn = false;
+    boolean isCheatSheetOn;
+    boolean isQuesOn = false;
+
+    Group groupofquestionthing;
+
+//    // FIELDS REGARDING MATH PROBLEMS IN THE GAME
+//    public ViewGroup.LayoutParams lp;
+//    public View secondLayerView;
 
     TextView quesPrompt;
 
@@ -61,14 +79,24 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceBundle){
         super.onCreate(savedInstanceBundle);
-//        setContentView(R.layout.activity_room);
+        setContentView(R.layout.activity_room);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.calculator);
 
         //Initialize objects and call method to initialize the questions
-//        currentScore = 0;
-//        myQuesObject = new AbstractQuestions();
-//        initializeQuestions();
+        currentScore = 0;
+        myQuesObject = new AbstractQuestions();
+
+        findViewById(R.id.xmlCalculator).setVisibility(View.GONE);
+        EditText ed = (EditText) findViewById(R.id.answerText);
+        ed.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        groupofquestionthing = findViewById(R.id.group);
+        groupofquestionthing.setVisibility(View.GONE);
+        findViewById(R.id.formulaScroll).setVisibility(View.GONE);
+
+        initializeQuestions();
+        currentScore = 0;
+        myQuesObject = new AbstractQuestions();
+
         myCalcText = findViewById(R.id.calcTextView);
         myCalc0 = findViewById(R.id.calc0);
         myCalc1 = findViewById(R.id.calc1);
@@ -157,21 +185,88 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         currentQuestion = myQuesObject.getQuestion();
         currentAnswer = myQuesObject.getAnswer();
 
+        System.out.println("Current Answer is: " + currentAnswer);
+
         quesPrompt = findViewById(R.id.quePrompt);
         quesPrompt.setText(currentQuestion);
     }
 
     public void nextQuestion(){
-        currentQuestion = myQuesObject.getQuestion();
-        currentAnswer = myQuesObject.getAnswer();
+
+        System.out.println("Yeah! That's Current Answer: ");
+
+        //finish current room activity and go back to previous one
+        finish();
+//        myQuesObject.generateQuestionChoice();
+//        currentQuestion = myQuesObject.getQuestion();
+//        currentAnswer = myQuesObject.getAnswer();
+
+//        quesPrompt = findViewById(R.id.quePrompt);
+//        quesPrompt.setText(currentQuestion);
+
+//       .setBackground(R.drawable.room2_fog)
     }
 
-    public void onClickFormulaSheet(){
-        //display the all formula
+    public void onClickFormulaSheet(View view){
+        if(isCheatSheetOn){
+            findViewById(R.id.formulaScroll).setVisibility(View.GONE);
+            isCheatSheetOn = false;
+        }
+        else{
+            findViewById(R.id.formulaScroll).setVisibility(View.VISIBLE);
+            isCheatSheetOn = true;
+        }
     }
+
 
     public void onClickCalculator(View view){
-        //call calculator layout and put it on the current layout ??
+
+        if(isCalcOn){
+            findViewById(R.id.xmlCalculator).setVisibility(View.GONE);
+            isCalcOn = false;
+        }
+        else{
+            findViewById(R.id.xmlCalculator).setVisibility(View.VISIBLE);
+            isCalcOn = true;
+        }
+    }
+
+    public void onClickQuestion(View view){
+        if(isQuesOn){
+            groupofquestionthing.setVisibility(View.GONE);
+            isQuesOn = false;
+        }
+        else{
+            groupofquestionthing.setVisibility(View.VISIBLE);
+            isQuesOn = true;
+        }
+    }
+
+    public void changebackground(int id){
+
+        ConstraintLayout v = (ConstraintLayout) findViewById(R.id.activityroom);
+
+        switch (id){
+
+            case 1:
+                v.setBackgroundResource(R.drawable.room1_fog);
+                break;
+            case 2:
+                v.setBackgroundResource(R.drawable.room2_fog);
+                break;
+            case 3:
+                v.setBackgroundResource(R.drawable.room3_fog);
+                break;
+            case 4:
+                v.setBackgroundResource(R.drawable.room4_fog);
+                break;
+            case 5:
+                v.setBackgroundResource(R.drawable.room5_fog);
+                break;
+            default:
+                break;
+
+        }
     }
 
     /**
@@ -184,24 +279,69 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         EditText ansText = findViewById(R.id.answerText);
         String userInput = ansText.getText().toString();
 
-        double RightansInDouble = Double.parseDouble(currentAnswer);
-        double UseansInDouble = Double.parseDouble(userInput);
+        //choice 4 ans contains comma
+        //
+        double RightansInDouble;
+        double UseansInDouble;
 
-        //If the answer is right
-        if(Math.abs(RightansInDouble - UseansInDouble) <= 0.2){
-            //Do something
-            //Increment in points
-            TextView score = findViewById(R.id.Currentscore);
-            currentScore++;
-            score.setText(currentScore+"");
+        try {
+            if (currentAnswer.contains(",")) {
+//            RightansInDouble = Double.parseDouble(currentAnswer);
+                UseansInDouble = Double.parseDouble(userInput);
 
-            //new question to be displayed
-            nextQuestion();
+                String[] ans = currentAnswer.split(",");
+                double ans1 = Double.parseDouble(ans[0]);
+                double ans2 = Double.parseDouble(ans[1]);
+
+                //If the answer is right
+                if (Math.abs(ans1 - UseansInDouble) <= 0.2 || Math.abs(ans2 - UseansInDouble) <= 0.2) {
+                    //Do something
+                    //Increment in points
+                    TextView score = findViewById(R.id.Currentscore);
+                    currentScore = Integer.parseInt(score.getText().toString());
+                    currentScore++;
+                    score.setText(currentScore + "");
+
+                    //new question to be displayed
+                    nextQuestion();
+                } else {
+                    //if the use entered answer is incorrect
+                    // go down a stage
+                    System.out.println("Wrong answer");
+                    Toast t = Toast.makeText(Activity_Room.this, "Wrong Answer! Try again!", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            } else {
+                RightansInDouble = Double.parseDouble(currentAnswer);
+                UseansInDouble = Double.parseDouble(userInput);
+
+                //If the answer is right
+                if (Math.abs(RightansInDouble - UseansInDouble) <= 0.2) {
+                    //Do something
+                    //Increment in points
+                    TextView score = findViewById(R.id.Currentscore);
+                    currentScore++;
+                    score.setText(currentScore + "");
+
+                    //new question to be displayed
+                    nextQuestion();
+                } else {
+                    //if the use entered answer is incorrect
+                    System.out.println("Wrong answer");
+                    Toast t = Toast.makeText(Activity_Room.this, "Wrong Answer! Try again!", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
         }
-        else{
-            //if the use entered answer is incorrect
-            // ?
+        catch (Exception e){
+            Toast t = Toast.makeText( Activity_Room.this, "Invalid Input! Use only digits and points if necessary!", Toast.LENGTH_SHORT);
+            t.show();
+            System.out.println("Invalid Input");
         }
+
+        //for testing purpose
+//        System.out.println("Clicked submit button");
+//        nextQuestion();
     }
 
 }
