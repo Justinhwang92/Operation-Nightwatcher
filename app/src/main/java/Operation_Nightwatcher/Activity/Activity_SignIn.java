@@ -2,7 +2,6 @@ package Operation_Nightwatcher.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,16 +18,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import com.td.OperationNightwatcher.BuildConfig;
 import com.td.OperationNightwatcher.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Activity_SignIn extends AppCompatActivity {
     public static final int TAKE_PIC_REQUEST_CODE = 0;
@@ -90,6 +91,7 @@ public class Activity_SignIn extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Sorry there was an error! Try again.", Toast.LENGTH_LONG).show();
                         } else {
                             takePicture.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
+                            takePicture.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             startActivityForResult(takePicture, TAKE_PIC_REQUEST_CODE);
                         }
                     }
@@ -105,7 +107,7 @@ public class Activity_SignIn extends AppCompatActivity {
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && data.getData()!=null) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -143,7 +145,8 @@ public class Activity_SignIn extends AppCompatActivity {
             }
             //return file uri
             Log.d("UPLOADIMAGE", "FILE: " + Uri.fromFile(mediaFile));
-            return Uri.fromFile(mediaFile);
+            return FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
+                    BuildConfig.APPLICATION_ID + ".provider", mediaFile);
         } else {
             return null;
         }
