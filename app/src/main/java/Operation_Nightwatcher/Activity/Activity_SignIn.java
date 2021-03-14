@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+//the "sign in" class that displays before you get put into the game
 public class Activity_SignIn extends AppCompatActivity {
     public static final int TAKE_PIC_REQUEST_CODE = 0;
     public static final int CHOOSE_PIC_REQUEST_CODE = 1;

@@ -6,7 +6,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.td.OperationNightwatcher.R;
-
+//activity to display instructions for the game
 public class Activity_Instruction extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {

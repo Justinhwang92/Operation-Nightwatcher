@@ -1,16 +1,11 @@
 package Operation_Nightwatcher.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +17,11 @@ import com.td.OperationNightwatcher.R;
 
 import java.util.LinkedList;
 
-import Operation_Nightwatcher.Activity.Database.User;
 import Operation_Nightwatcher.Activity.ProblemClasses.AbstractQuestions;
 import Operation_Nightwatcher.Game.Calculator;
 import Operation_Nightwatcher.Game.ExpressionBuilder;
 
+//activity for a room in the game
 public class Activity_Room  extends AppCompatActivity implements View.OnClickListener {
 
     AbstractQuestions myQuesObject;
@@ -97,6 +92,7 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         currentScore = 0;
         myQuesObject = new AbstractQuestions();
 
+        //initialize the calculator buttons below, for now manually
         myCalcText = findViewById(R.id.calcTextView);
         myCalc0 = findViewById(R.id.calc0);
         myCalc1 = findViewById(R.id.calc1);
@@ -164,10 +160,11 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         {
             b.setOnClickListener(this);
         }
+        //for dealing with the calculator screen
         ExpressionBuilder e = new ExpressionBuilder(this);
 
         Calculator c = new Calculator();
-
+        //end calculator initialization
     }
 
     @Override

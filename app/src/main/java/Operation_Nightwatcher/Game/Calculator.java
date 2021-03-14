@@ -3,6 +3,7 @@ package Operation_Nightwatcher.Game;
 import java.math.BigDecimal;
 import java.util.Stack;
 
+//functionality:
 //basic operations
 //trig functions + inverse trig
 //sqrt, powers
@@ -10,7 +11,6 @@ import java.util.Stack;
 //natural log
 //pi
 //e
-
 
 //for the dropdown calculator in the game
 public class Calculator {
@@ -42,23 +42,81 @@ public class Calculator {
             return null;
         }
 
-        BigDecimal answer = new BigDecimal(0);
+        calculateString = insertHiddenMultiplication(calculateString);
 
+        BigDecimal answer = null;
+
+        boolean calcSuccess = true;
         try
         {
             answer = eval(calculateString);
         }
         catch(StackOverflowError e)
         {
+            calcSuccess = false;
             displayErrorMessage(new Exception("Out of memory"));
         }
         catch(Exception e)
         {
-            displayErrorMessage(new Exception("Error"));
+            calcSuccess = false;
+            displayErrorMessage(new Exception("Unexpected character"));
         }
+        if(calcSuccess)
         myPrevious = answer;
         return answer;
     }
+
+    //function to insert hidden multiplication signs where multiplication is needed
+    //i.e. 3(3) = 3*3 or 3*(3)
+    //this ensures that the eval() function can run correctly
+    private static String insertHiddenMultiplication(String theInput)
+    {
+        System.out.println("IS THIS EVEN RUNNING??????");
+        String result = theInput;
+
+        for(int i = 0; i < result.length(); i++)
+        {
+            //cases to consider:
+            //operand before open parentheses
+            //operand after function end parentheses
+            //operand with special operand (i.e. pi or e)
+
+            //whats an operand?:
+            //1. numbers
+            //2. function (look for closed parentheses)
+            //3. pi || e
+            char current = result.charAt(i);
+
+            boolean op1IsNumber = current >= '0' && current <= '9';
+            boolean op1IsEndOfExpression = current == ')';
+            boolean op1IsSpecialChar = current == 'e' || (current == 'i' && result.charAt(i - 1) == 'p');
+
+            if(i + 1 < result.length())
+            {
+                if(op1IsNumber || op1IsEndOfExpression || op1IsSpecialChar)
+                {
+                    System.out.println("CURRENT CHAR IS AN OPERAND");
+                    char next = result.charAt(i + 1);
+
+                    boolean op2IsStartOfExpression = next == '(';
+                    boolean op2IsFunction = next == 's' || next == 'c' || next == 't' || next == 'a' || next == ';';
+                    boolean op2IsSpecialChar = next == 'p' || next == 'e';
+
+                    if(op2IsFunction || op2IsSpecialChar || op2IsStartOfExpression)
+                    {
+                        System.out.println("NEXT CHAR IS ALSO AN OPERAND");
+                        result = result.substring(0, i + 1) + '*' + result.substring(i + 1);
+                        i++;
+                        System.out.println("MODIFIED INPUT: " + result);
+                    }
+                }
+            }
+
+        }
+
+        return result;
+    }
+
 
     private static BigDecimal eval(final String str) {
         return new Object() {
@@ -80,7 +138,7 @@ public class Calculator {
             BigDecimal parse() {
                 nextChar();
                 double x = parseExpression();
-                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
+                if (pos < str.length()) { System.out.println("UNEXPECTED CHAR -- parse()"); throw new RuntimeException("Unexpected: " + (char)ch); }
                 return new BigDecimal(x);
             }
 
@@ -134,9 +192,9 @@ public class Calculator {
                     else if (func.equals("ln")) x = Math.log(x);
                     else if (func.equals("pi")) x = Math.PI;
                     else if (func.equals("e")) x = Math.E;
-                    else throw new RuntimeException("Unknown function: " + func);
+                    else System.out.println("UNKNOWN FUNC"); throw new RuntimeException("Unknown function: " + func);
                 } else {
-                    throw new RuntimeException("Unexpected: " + (char)ch);
+                    /*FIGURE OUT WHAT IS CAUSING IT TO RETURN -1!!!!!!!!!!!!!*/System.out.println("UNEXPECTED CHAR -- parseFactor()"); throw new RuntimeException("Unexpected: " + (char)ch);
                 }
 
                 if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
@@ -161,7 +219,12 @@ public class Calculator {
 
         if(!checkFunctions(theInput))
         {
-            return new Exception("Please surround function parameters without parentheses");
+            return new Exception("Please surround function parameters with parentheses");
+        }
+
+        if(!checkDecimals(theInput))
+        {
+            return new Exception("Invalid decimal point syntax");
         }
 
         return null;
@@ -254,22 +317,49 @@ public class Calculator {
     {
         for(int i = 0; i < theInput.length(); i++)
         {
-            if(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+            if(theInput.charAt(i) >= 'a' && theInput.charAt(i) <= 'z')
             {
-                while(theInput.charAt(i) >= 'a' && theInput.charAt(i) >= 'a')
+                StringBuilder funcName = new StringBuilder();
+                funcName.append(theInput.charAt(i));
+
+                while(theInput.charAt(i) >= 'a' && theInput.charAt(i) <= 'z' && !(funcName.toString().equals("pi") || funcName.toString().equals("e")))
                 {
+
                     i++;
                     if(i >= theInput.length())
                     {
                         return false;
                     }
+
+                    if(i < theInput.length())
+                    funcName.append(theInput.charAt(i));
+
                 }
-                if(theInput.charAt(i) != '(')
+                if(theInput.charAt(i) != '(' && !(funcName.toString().equals("pi") || funcName.toString().equals("e")))
                 {
                     return false;
                 }
             }
         }
+        return true;
+    }
+
+    private static boolean checkDecimals(String theInput)
+    {
+        for(int i = 0; i < theInput.length(); i++)
+        {
+            if(theInput.charAt(i) == '.')
+            {
+                if(i + 1 < theInput.length())
+                {
+                    if(!(theInput.charAt(i + 1) >= '0' && theInput.charAt(i + 1) <= '9'))
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
