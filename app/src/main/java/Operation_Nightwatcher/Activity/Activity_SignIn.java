@@ -23,6 +23,7 @@ import androidx.core.content.FileProvider;
 import com.td.OperationNightwatcher.BuildConfig;
 import com.td.OperationNightwatcher.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -38,6 +39,7 @@ public class Activity_SignIn extends AppCompatActivity {
 
     private Uri mMediaUri;
     private ImageView img_profile;
+    Bitmap selectedImage;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -55,9 +57,13 @@ public class Activity_SignIn extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //to start activity room intent directly
-//                Intent intent = new Intent(Activity_SignIn.this, Activity_Room.class);
                 Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
+                if(selectedImage != null){
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] bytes = stream.toByteArray();
+                    intent.putExtra("profileImage",bytes);
+                }
                 startActivity(intent);
             }
         });
@@ -111,7 +117,7 @@ public class Activity_SignIn extends AppCompatActivity {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                selectedImage = BitmapFactory.decodeStream(imageStream);
                 img_profile.setImageBitmap(selectedImage);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
