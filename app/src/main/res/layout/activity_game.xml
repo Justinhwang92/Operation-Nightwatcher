@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/doors_fog">
 
+<!--    <include-->
+<!--        android:id="@+id/timer"-->
+<!--        layout="@layout/timer"-->
+<!--        android:layout_width="264dp"-->
+<!--        android:layout_height="34dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.918"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.042" />-->
+
     <Button
         android:id="@+id/door1"
         android:layout_width="121dp"

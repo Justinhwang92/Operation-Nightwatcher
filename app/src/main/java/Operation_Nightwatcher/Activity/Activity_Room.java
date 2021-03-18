@@ -2,6 +2,7 @@ package Operation_Nightwatcher.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,14 @@ import androidx.constraintlayout.widget.Group;
 
 import com.td.OperationNightwatcher.R;
 
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 
 import Operation_Nightwatcher.Activity.Database.User;
 import Operation_Nightwatcher.Activity.ProblemClasses.AbstractQuestions;
 import Operation_Nightwatcher.Game.Calculator;
 import Operation_Nightwatcher.Game.ExpressionBuilder;
+import Operation_Nightwatcher.Game.TimerClass;
 
 public class Activity_Room  extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,6 +39,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
     boolean isCalcOn = false;
     boolean isCheatSheetOn;
     boolean isQuesOn = false;
+
+    Activity_Game activity_game;
 
     Group groupofquestionthing;
 
@@ -85,6 +90,7 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         //Initialize objects and call method to initialize the questions
         currentScore = 0;
         myQuesObject = new AbstractQuestions();
+        activity_game = new Activity_Game();
 
         findViewById(R.id.xmlCalculator).setVisibility(View.GONE);
         EditText ed = (EditText) findViewById(R.id.answerText);
@@ -167,6 +173,32 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         ExpressionBuilder e = new ExpressionBuilder(this);
 
         Calculator c = new Calculator();
+        TimerClass counter;
+        try {
+            counter = TimerClass.getInstance();
+            System.out.println("Timer: " + counter.getFormatedTime());
+//            ((TextView) findViewById(R.id.time)).setText(counter.getFormatedTime());
+
+            new CountDownTimer(counter.time, 1000){
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    millisUntilFinished = millisUntilFinished/1000;
+                    ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+                            (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+                }
+
+                @Override
+                public void onFinish() {
+                    System.out.println("Activity done room class");
+                    Intent finish = new Intent(Activity_Room.this, Activity_Menu.class);
+                    startActivity(finish);
+                }
+            }.start();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
 
     }
 

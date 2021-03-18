@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="63dp"-->
+<!--        android:layout_height="39dp"-->
+<!--        android:inputType="none"-->
+<!--        android:text="Time:"-->
+<!--        android:textAllCaps="true"-->
+<!--        android:textColor="#D6DACA"-->
+<!--        android:textColorHighlight="#E6CFCF"-->
+<!--        android:textSize="@dimen/_13sdp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.097"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.131" />-->
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="210dp"
+        android:layout_height="47dp"
+        android:fontFamily="serif-monospace"
+        android:inputType="none"
+        android:text="Time: 00:00:00"
+        android:textAllCaps="true"
+        android:textColor="#D6DACA"
+        android:textColorHighlight="#E6CFCF"
+        android:textSize="@dimen/_18sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
