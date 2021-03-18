@@ -59,6 +59,7 @@ public class Activity_SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
+                // send profile picture to game room
                 if(selectedImage != null){
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
