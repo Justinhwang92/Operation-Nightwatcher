@@ -13,8 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.td.OperationNightwatcher.R;
 
+//this class represents the main gameplay loop
 public class Activity_Game extends AppCompatActivity {
-
+    //the room you go into when you click a door
     Activity_Room activityRoom;
     private ImageView img_profile;
 
@@ -37,7 +38,7 @@ public class Activity_Game extends AppCompatActivity {
         }
 
     }
-
+    //below are onclick methods for the doors
     public void door1Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);

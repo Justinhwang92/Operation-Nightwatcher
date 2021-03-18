@@ -13,6 +13,7 @@ import com.td.OperationNightwatcher.R;
 
 import Operation_Nightwatcher.Game.Calculator;
 
+//activity for the main menu of the game
 public class Activity_Menu extends AppCompatActivity implements View.OnClickListener {
 
     @Override

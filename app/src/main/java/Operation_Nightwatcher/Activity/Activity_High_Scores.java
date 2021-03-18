@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.firebase.database.*;
+import com.google.firebase.database.FirebaseDatabase;
 import com.td.OperationNightwatcher.R;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
     UserCursorAdapter mUserCursorAdapter;
     ListView HighScoresList;
     List<User> userList;
-    //Audio_Activity_High_Scores myAudio;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,56 +35,10 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //audio
-    //    myAudio = new Audio_Activity_High_Scores(this);
-       // Audio_Master_Control.checkMuteStatus(myAudio);
-      //  myAudio.startMedia(Audio_Activity_High_Scores.MEDIA_PLAYERS.BGM_CREDITS_LOOP);
-
-        //mute button
-        /*if(Audio_Master_Control.myMuted)
-        {
-            muteAudio();
-            ImageView audio = findViewById(R.id.gameaudio);
-            audio.setImageResource(R.drawable.muted_audio);
-        }*/
-
-        /*findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView audio = findViewById(R.id.gameaudio);
-                if(Audio_Master_Control.myMuted)
-                {
-                    audio.setImageResource(R.drawable.unmuted_audio);
-                    unmuteAudio();
-                }
-                else
-                {
-                    audio.setImageResource(R.drawable.muted_audio);
-                    muteAudio();
-                }
-            }
-        });*/
-
-
-        // go back to main menu
-        //findViewById(R.id.backToMain).setOnClickListener(this);
-     /*
-             TODO: Commented Previous code, will remove it in the future it necessary
-
-
-        // get database
-        mUserCursorAdapter = new UserCursorAdapter(this, null);
-        HighScoresList.setAdapter(mUserCursorAdapter);
-
-
-
-        // loader
-        getLoaderManager().initLoader(USER_LOADER, null, this);*/
     }
 
     @Override
     public void onClick(View v) {
-        //myAudio.releasePlayers();
         Intent i;
         i = new Intent(this, Activity_Menu.class);
         finish();
@@ -95,55 +49,16 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
         finish();
     }
 
-/*
-        TODO: Commented Previous code, will remove it in the future it necessary
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        // displaying sections
-        String[] projection = {
-                UserEntry._ID,
-                UserEntry.COLUMN_USER_NAME,
-                UserEntry.COLUMN_HIGH_SCORE,
-                UserEntry.COLUMN_LAST_GAME_SCORE
-        };
-
-        // sorting order
-        String sortOrder = UserEntry.COLUMN_HIGH_SCORE + " DESC limit 50";
-
-        // loader
-        return new CursorLoader(this,
-                UserEntry.CONTENT_URI,
-                projection,
-                null,
-                null,
-                sortOrder
-        );
-
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mUserCursorAdapter.swapCursor(cursor);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        mUserCursorAdapter.swapCursor(null);
-    }
-*/
 
     //called when application stops
     @Override
     protected void onPause() {
         super.onPause();
-       // myAudio.pauseLoopers();
     }
     //called when application starts/resumes
     @Override
     protected void onResume() {
         super.onResume();
-        //myAudio.resumeLoopers();
     }
 
     //called when application stops
@@ -152,17 +67,13 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
         super.onStop();
     }
 
-    //i think this is called when display turns back on.
-    //if you press the power button and turn the emulator off and press again to start
-    //it calls this method. not sure if power button on emulator just turns off screen or turns
-    //off emulator
     @Override
     protected void onRestart(){
         super.onRestart();
-        //myAudio.releasePlayers();
-        //myAudio = new Audio_Activity_High_Scores(this);
     }
     //called when application starts/resumes
+    //firebase code from previous project: not sure if we need this
+    /*
     @Override
     protected void onStart(){
         super.onStart();
@@ -227,14 +138,6 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
             }
         });
     }
+*/
 
-    /*public void muteAudio()
-    {
-        Audio_Master_Control.muteAllPlayers(myAudio);
-    }
-
-    public void unmuteAudio()
-    {
-        Audio_Master_Control.unmuteAllPlayers(myAudio);
-    }*/
 }
