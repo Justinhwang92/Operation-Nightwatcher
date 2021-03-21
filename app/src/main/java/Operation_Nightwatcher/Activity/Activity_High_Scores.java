@@ -34,6 +34,9 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
 
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // back button
+        findViewById(R.id.backToMain).setOnClickListener(this);
+
 
     }
 
