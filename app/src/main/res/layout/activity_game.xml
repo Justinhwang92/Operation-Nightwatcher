@@ -7,17 +7,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/doors_fog">
 
-<!--    <include-->
-<!--        android:id="@+id/timer"-->
-<!--        layout="@layout/timer"-->
-<!--        android:layout_width="264dp"-->
-<!--        android:layout_height="34dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.918"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.042" />-->
+    <include
+        android:id="@+id/timer"
+        layout="@layout/timer"
+        android:layout_width="203dp"
+        android:layout_height="38dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/img_profile"
@@ -32,62 +32,80 @@
 
     <Button
         android:id="@+id/door1"
-        android:layout_width="@dimen/_97sdp"
-        android:layout_height="@dimen/_188sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_width="121dp"
+        android:layout_height="234dp"
         android:layout_marginBottom="@dimen/_30sdp"
+        android:background="#33034400"
         android:onClick="door1Click"
-        android:background="@android:color/transparent"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile"
+        app:layout_constraintVertical_bias="0.82" />
 
     <Button
         android:id="@+id/door2"
-        android:layout_width="@dimen/_97sdp"
-        android:layout_height="@dimen/_188sdp"
+        android:layout_width="121dp"
+        android:layout_height="237dp"
         android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginEnd="452dp"
+        android:background="#33034400"
+        android:layout_marginRight="452dp"
         android:onClick="door2Click"
-        android:background="@android:color/transparent"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/door1" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/door1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.758" />
 
     <Button
         android:id="@+id/door3"
-        android:layout_width="@dimen/_97sdp"
-        android:layout_height="@dimen/_188sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_width="124dp"
+        android:layout_height="231dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="304dp"
+        android:layout_marginRight="304dp"
+        android:background="#33034400"
         android:onClick="door3Click"
-        android:background="@android:color/transparent"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/door2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/door2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733" />
 
     <Button
         android:id="@+id/door4"
-        android:layout_width="@dimen/_97sdp"
-        android:layout_height="@dimen/_188sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_width="125dp"
+        android:layout_height="238dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginRight="160dp"
+        android:background="#33034400"
         android:onClick="door4Click"
-        android:background="@android:color/transparent"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/door3" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/door3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.751" />
 
     <Button
         android:id="@+id/door5"
-        android:layout_width="@dimen/_97sdp"
-        android:layout_height="@dimen/_188sdp"
+        android:layout_width="123dp"
+        android:layout_height="237dp"
         android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#33034400"
         android:onClick="door5Click"
-        android:background="@android:color/transparent"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/door4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/door4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746" />
 </androidx.constraintlayout.widget.ConstraintLayout>

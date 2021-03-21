@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class Activity_Game extends AppCompatActivity {
     //the room you go into when you click a door
     Activity_Room activityRoom;
     static int time;
+    static int score;
     private ImageView img_profile;
 
     private MediaPlayer myBGM;
@@ -43,25 +46,38 @@ public class Activity_Game extends AppCompatActivity {
         myBGM.start();
 
         activityRoom = new Activity_Room();
-
+        score = 0;
         TimerClass counterClass = TimerClass.initInstance(900000, 1000);
-        counterClass.start();
+
+//        counterClass.start();
 //        TimerClass.initInstance((15*60*1000), 1000);
         try {
+            counterClass = TimerClass.getInstance();
+            counterClass.start();
             System.out.println("Timer: " + counterClass.getFormatedTime());
 //            ((TextView) findViewById(R.id.time)).setText(counterClass.getFormatedTime());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //Bulb icon blinking animation
+        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
+        animation.setDuration(1000); //1 second duration for each animation cycle
+        //animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
+        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
+
+
+        //to start the time of 15 minutes
         time = counterClass.time;
 
         new CountDownTimer(time, 1000){
             @Override
             public void onTick(long millisUntilFinished) {
                 millisUntilFinished = millisUntilFinished/1000;
-//                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
-//                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+                (findViewById(R.id.bulbicon)).startAnimation(animation); //to start animation
             }
 
             @Override
@@ -71,7 +87,19 @@ public class Activity_Game extends AppCompatActivity {
 //                startActivity(finish);
             }
         }.start();
-    }
+
+        //door blinking animation
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(100);
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+
+        findViewById(R.id.door1).startAnimation(anim);
+        findViewById(R.id.door2).startAnimation(anim);
+        findViewById(R.id.door3).startAnimation(anim);
+        findViewById(R.id.door4).startAnimation(anim);
+        findViewById(R.id.door5).startAnimation(anim);
 
         // Initialize the image view
         img_profile = findViewById(R.id.img_profile);
@@ -82,10 +110,16 @@ public class Activity_Game extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             img_profile.setImageBitmap(bitmap);
         }
-
     }
+
+
+
+//    }
+
     //below are onclick methods for the doors
     public void door1Click(View view){
+        findViewById(R.id.door1).setBackgroundColor(00000000);
+        findViewById(R.id.door1).clearAnimation();
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
         if (myBGM != null) {
@@ -99,6 +133,8 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void door2Click(View view){
+        findViewById(R.id.door2).setBackgroundColor(00000000);
+        findViewById(R.id.door2).clearAnimation();
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
         if (myBGM != null) {
@@ -112,6 +148,8 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void door3Click(View view){
+        findViewById(R.id.door3).setBackgroundColor(00000000);
+        findViewById(R.id.door3).clearAnimation();
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
         if (myBGM != null) {
@@ -126,6 +164,8 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void door4Click(View view){
+        findViewById(R.id.door4).setBackgroundColor(00000000);
+        findViewById(R.id.door4).clearAnimation();
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
         if (myBGM != null) {
@@ -140,6 +180,8 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void door5Click(View view){
+        findViewById(R.id.door5).setBackgroundColor(00000000);
+        findViewById(R.id.door5).clearAnimation();
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
         if (myBGM != null) {

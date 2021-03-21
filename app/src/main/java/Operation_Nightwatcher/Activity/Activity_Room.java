@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -33,10 +34,10 @@ import Operation_Nightwatcher.Game.TimerClass;
 //activity for a room in the game
 public class Activity_Room  extends AppCompatActivity implements View.OnClickListener {
 
-    AbstractQuestions myQuesObject;
-    String currentQuestion;
-    String currentAnswer;
-    int currentScore;
+    static AbstractQuestions myQuesObject;
+    static String currentQuestion;
+    static String currentAnswer;
+    static int currentScore;
     boolean isCalcOn = false;
     boolean isCheatSheetOn;
     boolean isQuesOn = false;
@@ -107,7 +108,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.formulaScroll).setVisibility(View.GONE);
 
         initializeQuestions();
-        currentScore = 0;
+        currentScore = activity_game.score;
+        ((TextView)findViewById(R.id.Currentscore)).setText(currentScore+"");
         myQuesObject = new AbstractQuestions();
 
         //initialize the calculator buttons below, for now manually
@@ -182,6 +184,9 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         ExpressionBuilder e = new ExpressionBuilder(this);
 
         Calculator c = new Calculator();
+
+        //for 15 minutes timer game clock
+        //timer class object to receive exact time
         TimerClass counter;
         try {
             counter = TimerClass.getInstance();
@@ -342,7 +347,9 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
                     TextView score = findViewById(R.id.Currentscore);
                     currentScore = Integer.parseInt(score.getText().toString());
                     currentScore++;
-                    score.setText(currentScore + "");
+
+                    activity_game.score++;
+                    score.setText(activity_game.score + "");
 
                     //new question to be displayed
                     nextQuestion();
@@ -363,7 +370,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
                     //Increment in points
                     TextView score = findViewById(R.id.Currentscore);
                     currentScore++;
-                    score.setText(currentScore + "");
+                    activity_game.score++;
+                    score.setText(activity_game.score + "");
 
                     //new question to be displayed
                     nextQuestion();

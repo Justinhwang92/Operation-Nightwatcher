@@ -15,6 +15,10 @@
         tools:layout_editor_absoluteY="36dp" />
 
     <include
+        android:id="@+id/bulb"
+        layout="@layout/bulb_icon" />
+
+    <include
         android:id="@+id/timer"
         layout="@layout/timer"
         android:layout_width="264dp"
@@ -215,18 +219,18 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="quePrompt, submit, answerText"/>
+        app:constraint_referenced_ids="quePrompt, submit, answerText" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="83dp"
-        android:layout_height="67dp"
-        app:layout_constraintBottom_toBottomOf="@+id/quePrompt"
-        app:layout_constraintEnd_toStartOf="@+id/formula"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toEndOf="@+id/Currentscore"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        app:srcCompat="@drawable/light_stage1" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="78dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/quePrompt"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/formula"-->
+<!--        app:layout_constraintHorizontal_bias="0.947"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/Currentscore"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:srcCompat="@drawable/light_stage1_removebg" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
