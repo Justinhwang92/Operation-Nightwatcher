@@ -1,5 +1,10 @@
 package Operation_Nightwatcher.Activity;
 
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -39,6 +44,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
     Activity_Game activity_game;
 
     Group groupofquestionthing;
+
+    private MediaPlayer myBGM;
 
 //    // FIELDS REGARDING MATH PROBLEMS IN THE GAME
 //    public ViewGroup.LayoutParams lp;
@@ -82,6 +89,10 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.activity_room);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        myBGM = MediaPlayer.create(this, R.raw.bgm_room);
+        myBGM.setLooping(true);
+        myBGM.start();
 
         //Initialize objects and call method to initialize the questions
         currentScore = 0;
@@ -375,4 +386,29 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
 //        nextQuestion();
     }
 
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+    @Override
+    protected void onRestart(){ super.onRestart(); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (myBGM != null)
+            myBGM.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (myBGM != null)
+            myBGM.start();
+    }
 }

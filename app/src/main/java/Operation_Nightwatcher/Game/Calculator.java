@@ -1,6 +1,7 @@
 package Operation_Nightwatcher.Game;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Stack;
 
 //functionality:
@@ -62,7 +63,10 @@ public class Calculator {
             displayErrorMessage(new Exception("Unexpected character"));
         }
         if(calcSuccess)
-        myPrevious = answer;
+        {
+            myPrevious = answer;
+        }
+
         return answer;
     }
 
@@ -71,7 +75,6 @@ public class Calculator {
     //this ensures that the eval() function can run correctly
     private static String insertHiddenMultiplication(String theInput)
     {
-        System.out.println("IS THIS EVEN RUNNING??????");
         String result = theInput;
 
         for(int i = 0; i < result.length(); i++)
@@ -95,7 +98,6 @@ public class Calculator {
             {
                 if(op1IsNumber || op1IsEndOfExpression || op1IsSpecialChar)
                 {
-                    System.out.println("CURRENT CHAR IS AN OPERAND");
                     char next = result.charAt(i + 1);
 
                     boolean op2IsStartOfExpression = next == '(';
@@ -104,10 +106,8 @@ public class Calculator {
 
                     if(op2IsFunction || op2IsSpecialChar || op2IsStartOfExpression)
                     {
-                        System.out.println("NEXT CHAR IS ALSO AN OPERAND");
                         result = result.substring(0, i + 1) + '*' + result.substring(i + 1);
                         i++;
-                        System.out.println("MODIFIED INPUT: " + result);
                     }
                 }
             }
@@ -127,6 +127,7 @@ public class Calculator {
             }
 
             boolean eat(int charToEat) {
+
                 while (ch == ' ') nextChar();
                 if (ch == charToEat) {
                     nextChar();
@@ -138,7 +139,7 @@ public class Calculator {
             BigDecimal parse() {
                 nextChar();
                 double x = parseExpression();
-                if (pos < str.length()) { System.out.println("UNEXPECTED CHAR -- parse()"); throw new RuntimeException("Unexpected: " + (char)ch); }
+                if (pos < str.length()) { throw new RuntimeException("Unexpected: " + (char)ch); }
                 return new BigDecimal(x);
             }
 
@@ -167,8 +168,10 @@ public class Calculator {
             }
 
             double parseFactor() {
+
                 if (eat('+')) return parseFactor(); // unary plus
                 if (eat('-')) return -parseFactor(); // unary minus
+
 
                 double x;
                 int startPos = this.pos;
@@ -181,21 +184,24 @@ public class Calculator {
                 } else if (ch >= 'a' && ch <= 'z') { // functions
                     while (ch >= 'a' && ch <= 'z') nextChar();
                     String func = str.substring(startPos, this.pos);
-                    x = parseFactor();
-                    if (func.equals("sqrt")) x = Math.sqrt(x);
-                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
-                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
-                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
-                    else if (func.equals("asin")) x = Math.asin(Math.toRadians(x));
-                    else if (func.equals("acos")) x = Math.acos(Math.toRadians(x));
-                    else if (func.equals("atan")) x = Math.atan(Math.toRadians(x));
-                    else if (func.equals("ln")) x = Math.log(x);
-                    else if (func.equals("pi")) x = Math.PI;
+                    if (func.equals("pi")) x = Math.PI;
                     else if (func.equals("e")) x = Math.E;
-                    else System.out.println("UNKNOWN FUNC"); throw new RuntimeException("Unknown function: " + func);
+                    else {
+                        x = parseFactor();
+                        if (func.equals("sqrt")) x = Math.sqrt(x);
+                        else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
+                        else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
+                        else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                        else if (func.equals("asin")) x = Math.asin(Math.toRadians(x));
+                        else if (func.equals("acos")) x = Math.acos(Math.toRadians(x));
+                        else if (func.equals("atan")) x = Math.atan(Math.toRadians(x));
+                        else if (func.equals("ln")) x = Math.log(x);
+                        else throw new RuntimeException("Unknown function: " + func);
+                    }
                 } else {
-                    /*FIGURE OUT WHAT IS CAUSING IT TO RETURN -1!!!!!!!!!!!!!*/System.out.println("UNEXPECTED CHAR -- parseFactor()"); throw new RuntimeException("Unexpected: " + (char)ch);
+                   throw new RuntimeException("Unexpected: " + (char)ch);
                 }
+
 
                 if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
 

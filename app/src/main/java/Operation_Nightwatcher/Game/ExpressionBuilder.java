@@ -5,6 +5,7 @@ import android.view.View;
 import com.td.OperationNightwatcher.R;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import Operation_Nightwatcher.Activity.Activity_Room;
 
@@ -87,6 +88,9 @@ public class ExpressionBuilder {
     private static void updateExpression(String theUpdate)
     {
         BigDecimal calculation = new BigDecimal(0);
+        boolean calculated = false;
+        String formatted = "";
+
         if(theUpdate.equals(""))
         {
             if(myExpression.length() > 0)
@@ -98,9 +102,23 @@ public class ExpressionBuilder {
         }
         else if(theUpdate.equals("equals"))
         {
-             calculation = Calculator.calculate(myExpression.toString());
+            calculated = true;
+            calculation = Calculator.calculate(myExpression.toString());
+            DecimalFormat limitDecimals = new DecimalFormat("#.#########");
+
+            String check = calculation.toPlainString();
+            if(check.contains(".") && check.substring(check.indexOf('.')).length() > 10)
+            {
+                formatted = limitDecimals.format(Calculator.getMyPrevious());
+            }
+
+            else
+            {
+                formatted = calculation.toString();
+            }
+
             if(calculation != null)
-            myExpression = new StringBuilder(Calculator.getMyPrevious().toString());
+                myExpression = new StringBuilder(formatted);
         }
         else
         {
@@ -108,6 +126,16 @@ public class ExpressionBuilder {
         }
 
         if(calculation != null)
-        myRoom.myCalcText.setText(myExpression.toString());
+        {
+            if(calculated)
+            {
+                myRoom.myCalcText.setText(formatted);
+            }
+            else
+            {
+                myRoom.myCalcText.setText(myExpression.toString());
+            }
+        }
+
     }
 }

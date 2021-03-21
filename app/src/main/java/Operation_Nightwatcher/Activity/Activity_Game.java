@@ -3,6 +3,11 @@ package Operation_Nightwatcher.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -25,11 +30,17 @@ public class Activity_Game extends AppCompatActivity {
     static int time;
     private ImageView img_profile;
 
+    private MediaPlayer myBGM;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game);
+
+        myBGM = MediaPlayer.create(this, R.raw.bgm_doors);
+        myBGM.setLooping(true);
+        myBGM.start();
 
         activityRoom = new Activity_Room();
 
@@ -77,18 +88,39 @@ public class Activity_Game extends AppCompatActivity {
     public void door1Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
 //        activityRoom.changebackground(1);
     }
 
     public void door2Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
 //        activityRoom.changebackground(2);
     }
 
     public void door3Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
 //        activityRoom.changebackground(3);
 
     }
@@ -96,6 +128,13 @@ public class Activity_Game extends AppCompatActivity {
     public void door4Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
 //        activityRoom.changebackground(4);
 
     }
@@ -103,6 +142,13 @@ public class Activity_Game extends AppCompatActivity {
     public void door5Click(View view){
         Intent room = new Intent(Activity_Game.this, Activity_Room.class);
         startActivity(room);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
 //        activityRoom.changebackground(5);
 
     }
@@ -117,4 +163,18 @@ public class Activity_Game extends AppCompatActivity {
     }
     @Override
     protected void onRestart(){ super.onRestart(); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (myBGM != null)
+            myBGM.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (myBGM != null)
+            myBGM.start();
+    }
 }

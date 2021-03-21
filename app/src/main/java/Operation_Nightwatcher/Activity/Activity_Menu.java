@@ -3,6 +3,11 @@ package Operation_Nightwatcher.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,11 +21,17 @@ import Operation_Nightwatcher.Game.Calculator;
 //activity for the main menu of the game
 public class Activity_Menu extends AppCompatActivity implements View.OnClickListener {
 
+    private MediaPlayer myBGM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
+
+        myBGM = MediaPlayer.create(this, R.raw.bgm_main_menu);
+        myBGM.setLooping(true);
+        myBGM.start();
 
         // Initialize textViews and buttons
         TextView title = findViewById(R.id.title);
@@ -43,17 +54,45 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.playButton:
                 startActivity(i);
+                if (myBGM != null) {
+                    if (myBGM.isPlaying())
+                        myBGM.stop();
+                    myBGM.reset();
+                    myBGM.release();
+                    myBGM = null;
+                }
                 finish();
                 break;
             case R.id.instructionButton:
                 startActivity(j);
+                if (myBGM != null) {
+                    if (myBGM.isPlaying())
+                        myBGM.stop();
+                    myBGM.reset();
+                    myBGM.release();
+                    myBGM = null;
+                }
                 finish();
                 break;
             case R.id.highScoreButton:
                 startActivity(k);
+                if (myBGM != null) {
+                    if (myBGM.isPlaying())
+                        myBGM.stop();
+                    myBGM.reset();
+                    myBGM.release();
+                    myBGM = null;
+                }
                 finish();
                 break;
             case R.id.tdgamesButton:
+                if (myBGM != null) {
+                    if (myBGM.isPlaying())
+                        myBGM.stop();
+                    myBGM.reset();
+                    myBGM.release();
+                    myBGM = null;
+                }
                 finish();
                 break;
         }
@@ -69,5 +108,20 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
     }
     @Override
     protected void onRestart(){ super.onRestart(); }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (myBGM != null)
+            myBGM.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (myBGM != null)
+            myBGM.start();
+    }
+
 
 }

@@ -22,6 +22,7 @@ import androidx.core.content.FileProvider;
 
 import com.td.OperationNightwatcher.BuildConfig;
 import com.td.OperationNightwatcher.R;
+import Operation_Nightwatcher.Activity.Database.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,6 +42,7 @@ public class Activity_SignIn extends AppCompatActivity {
     private Uri mMediaUri;
     private ImageView img_profile;
     Bitmap selectedImage;
+    User user = new User();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -58,15 +60,21 @@ public class Activity_SignIn extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
-                // send profile picture to game room
-                if(selectedImage != null){
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] bytes = stream.toByteArray();
-                    intent.putExtra("profileImage",bytes);
+                if(userName.getText().toString().matches("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter the user name!", Toast.LENGTH_SHORT).show();
+                } else{
+                    user.setUsername(userName.getText().toString().trim());
+                    Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
+                    // send profile picture to game room
+                    if(selectedImage != null){
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        byte[] bytes = stream.toByteArray();
+                        intent.putExtra("profileImage",bytes);
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
             }
         });
 
