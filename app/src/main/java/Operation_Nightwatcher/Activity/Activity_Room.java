@@ -11,6 +11,8 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ import com.td.OperationNightwatcher.R;
 
 import java.sql.SQLOutput;
 import java.util.LinkedList;
+import java.util.Random;
 
 import Operation_Nightwatcher.Activity.ProblemClasses.AbstractQuestions;
 import Operation_Nightwatcher.Game.Calculator;
@@ -99,6 +102,13 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         currentScore = 0;
         myQuesObject = new AbstractQuestions();
         activity_game = new Activity_Game();
+
+        Random rnd = new Random();
+        int index = rnd.nextInt(5);
+
+        changebackground(activity_game.allImagesnumber.get(index));
+//        activity_game.allImagesnumber.add(activity_game.allImagesnumber.get(0));
+//        activity_game.allImagesnumber.remove(0);
 
         findViewById(R.id.xmlCalculator).setVisibility(View.GONE);
         EditText ed = (EditText) findViewById(R.id.answerText);
@@ -175,6 +185,14 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
         buttons.add(myCalcAC);
         buttons.add(myCalcEquals);
 
+        //Bulb icon blinking animation
+        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
+        animation.setDuration(1000); //1 second duration for each animation cycle
+        //animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
+        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
+
+        (findViewById(R.id.bulbicon)).startAnimation(animation); //to start animation
 
         for(Button b : buttons)
         {
@@ -295,20 +313,20 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
 
         switch (id){
 
+            case 0:
+                v.setBackgroundResource(R.drawable.room1_clear);
+                break;
             case 1:
-                v.setBackgroundResource(R.drawable.room1_fog);
+                v.setBackgroundResource(R.drawable.room2clear);
                 break;
             case 2:
-                v.setBackgroundResource(R.drawable.room2_fog);
+                v.setBackgroundResource(R.drawable.room3_clear);
                 break;
             case 3:
-                v.setBackgroundResource(R.drawable.room3_fog);
+                v.setBackgroundResource(R.drawable.room4_clear);
                 break;
             case 4:
-                v.setBackgroundResource(R.drawable.room4_fog);
-                break;
-            case 5:
-                v.setBackgroundResource(R.drawable.room5_fog);
+                v.setBackgroundResource(R.drawable.room5_clear);
                 break;
             default:
                 break;

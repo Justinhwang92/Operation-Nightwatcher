@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_fog">
+    android:background="@drawable/menu_clear">
 
     <ImageView
         android:id="@+id/backToMain"
@@ -27,7 +27,7 @@
         \n3. Using the doors to your left, when flashing, select and answer the following prompts before time runs out. Be careful of the bulb icon. If you don't answer correctly or fail
 to answer all prompt hidden in each door, you will die. \n4. Answer problems faster than your friends to get the highest score on the leaderboard. Do you think
 you have smarts to get out of this hunted house."
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@ you have smarts to get out of this hunted house."
         android:gravity="center_horizontal"
         android:text="Instructions"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

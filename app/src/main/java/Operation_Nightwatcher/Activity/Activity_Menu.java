@@ -7,6 +7,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -101,6 +102,9 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.tdgamesButton:
+                Uri uri = Uri.parse("https://www.tutordudes.com/tdgames"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 if (myBGM != null) {
                     if (myBGM.isPlaying())
                         myBGM.stop();

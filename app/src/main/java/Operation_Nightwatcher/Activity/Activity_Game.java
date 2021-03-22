@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.td.OperationNightwatcher.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 
 import Operation_Nightwatcher.Game.TimerClass;
@@ -32,6 +35,9 @@ public class Activity_Game extends AppCompatActivity {
     static int time;
     static int score;
     private ImageView img_profile;
+
+    static List<Integer> allImagesnumber = Arrays.asList(2,3,1,0,4);
+
 
     private MediaPlayer myBGM;
 
@@ -47,6 +53,9 @@ public class Activity_Game extends AppCompatActivity {
 
         activityRoom = new Activity_Room();
         score = 0;
+//        allImagesnumber = new ArrayList<>();
+
+
         TimerClass counterClass = TimerClass.initInstance(900000, 1000);
 
 //        counterClass.start();
@@ -60,12 +69,7 @@ public class Activity_Game extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //Bulb icon blinking animation
-        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
-        animation.setDuration(1000); //1 second duration for each animation cycle
-        //animation.setInterpolator(new LinearInterpolator());
-        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
-        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
+
 
 
         //to start the time of 15 minutes
@@ -77,7 +81,6 @@ public class Activity_Game extends AppCompatActivity {
                 millisUntilFinished = millisUntilFinished/1000;
                 ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
                         (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
-                (findViewById(R.id.bulbicon)).startAnimation(animation); //to start animation
             }
 
             @Override
@@ -193,6 +196,15 @@ public class Activity_Game extends AppCompatActivity {
         }
 //        activityRoom.changebackground(5);
 
+    }
+
+    public void doneGame(){
+        if(score == 5){
+            //Game victory
+        }
+        else{
+            //Game over
+        }
     }
 
     @Override
