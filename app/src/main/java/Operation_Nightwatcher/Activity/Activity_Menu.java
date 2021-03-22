@@ -46,11 +46,26 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
         highScoreButton.setOnClickListener(this);
     }
 
+    public void onClickBackstory(View view){
+        Intent l = new Intent(this, Activity_BackStory.class);
+        System.out.println("\n *\nback Story clicked");
+        startActivity(l);
+        if (myBGM != null) {
+            if (myBGM.isPlaying())
+                myBGM.stop();
+            myBGM.reset();
+            myBGM.release();
+            myBGM = null;
+        }
+        finish();
+    }
+
     @Override
     public void onClick(View view) {
         Intent i = new Intent(this, Activity_SignIn.class);
         Intent j = new Intent(this, Activity_Instruction.class);
         Intent k = new Intent(this, Activity_High_Scores.class);
+
         switch (view.getId()) {
             case R.id.playButton:
                 startActivity(i);

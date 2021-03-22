@@ -23,6 +23,10 @@
             android:name="Operation_Nightwatcher.Activity.Activity_Menu"
             android:screenOrientation="landscape">
         </activity>
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_BackStory"
+            android:screenOrientation="landscape">
+        </activity>
         <activity android:name="Operation_Nightwatcher.Activity.Activity_High_Scores" android:screenOrientation="landscape"></activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Room"

@@ -21,31 +21,30 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="656dp"
-        android:layout_height="276dp"
-        android:fontFamily="serif-monospace"
+        android:layout_width="729dp"
+        android:layout_height="300dp"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:text="One a dare from your friends, you venture to an old haunted house on the hill to get an artifact, supposedly worth millions! Little did you or your friends know, the house is haunted by physics demons who seek to eat human flesh of those who possess
 weak physics fundamentals. The only way to escape is to solve their physics maze and blend in? Do you have the smarts to survive?!"
         android:textAlignment="center"
-        android:textSize="25sp"
         android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="257dp"
         android:layout_height="60dp"
-        android:fontFamily="serif-monospace"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:text="Backstory"
-        android:textColor="@color/white"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="45sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
