@@ -31,49 +31,50 @@
 
     <Button
         android:id="@+id/door1"
-        android:layout_width="121dp"
-        android:layout_height="234dp"
+        android:layout_width="125dp"
+        android:layout_height="230dp"
         android:background="#33034400"
         android:onClick="door1Click"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/door2"
-        android:layout_width="121dp"
-        android:layout_height="237dp"
+        android:layout_width="125dp"
+        android:layout_height="230dp"
         android:background="#33034400"
         android:onClick="door2Click"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/door3"
-        android:layout_width="124dp"
-        android:layout_height="231dp"
+        android:layout_width="125dp"
+        android:layout_height="230dp"
         android:background="#33034400"
         android:onClick="door3Click"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4988"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/door4"
         android:layout_width="125dp"
-        android:layout_height="238dp"
+        android:layout_height="230dp"
         android:background="#33034400"
         android:onClick="door4Click"
         android:text=""
@@ -81,22 +82,22 @@
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/door5"
-        android:layout_width="123dp"
-        android:layout_height="237dp"
+        android:layout_width="125dp"
+        android:layout_height="230dp"
         android:background="#33034400"
         android:onClick="door5Click"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias=".975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.764" />
+        app:layout_constraintVertical_bias="0.75" />
 </androidx.constraintlayout.widget.ConstraintLayout>
