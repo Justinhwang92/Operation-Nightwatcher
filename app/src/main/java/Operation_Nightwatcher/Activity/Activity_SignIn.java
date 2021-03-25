@@ -42,7 +42,7 @@ public class Activity_SignIn extends AppCompatActivity {
     private Uri mMediaUri;
     private ImageView img_profile;
     Bitmap selectedImage;
-    User user = new User();
+    static User user = new User();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
