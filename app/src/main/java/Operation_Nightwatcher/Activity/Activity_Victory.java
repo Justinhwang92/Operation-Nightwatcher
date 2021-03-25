@@ -51,7 +51,7 @@ public class Activity_Victory extends Activity implements View.OnClickListener  
         try {
             boolean flag = saveScore();
             if(!flag){
-                Toast.makeText(getApplicationContext(),"Inappropriate Username. Re-Enter", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Unexpected Error!", Toast.LENGTH_LONG).show();
             }else {
                 finish();
                 startActivity(i);
