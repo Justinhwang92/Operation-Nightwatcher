@@ -199,12 +199,25 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void doneGame(){
+        Intent intent;
         if(score == 5){
-            //Game victory
+            //Credit screen -> Game victory (just like asteroid fighter)
+            intent = new Intent(this, Activity_Credit.class);
         }
         else{
             //Game over
+            //below code is just dummy code to test score is stored and sent to credit class properly
+            //it should be Intent(this, gamover~~~.class)
+            intent = new Intent(this, Activity_GameStory.class);
         }
+
+        Bundle bundle = new Bundle();
+        String points;
+        points = Integer.toString(score);
+        bundle.putString("Score",points);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     @Override
