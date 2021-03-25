@@ -23,9 +23,7 @@ public class Activity_Credit extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        //Intent i = new Intent(this, Activity_Victory.class);
-        //above is right code, below is jsut dummy intent
-        Intent i = new Intent(this, Activity_GameStory.class);
+        Intent i = new Intent(this, Activity_Victory.class);
         Bundle bundle = new Bundle();
         bundle.putString("Score",Integer.toString(Activity_Game.score));
         i.putExtras(bundle);

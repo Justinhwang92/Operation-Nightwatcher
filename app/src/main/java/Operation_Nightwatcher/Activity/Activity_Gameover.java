@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.td.OperationNightwatcher.R;
 
-
 public class Activity_Gameover extends Activity implements View.OnClickListener  {
     TextView gameVictoryTitle;
     TextView gameVictoryText;
