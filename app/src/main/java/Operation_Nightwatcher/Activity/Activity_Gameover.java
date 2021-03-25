@@ -46,4 +46,15 @@ public class Activity_Gameover extends Activity implements View.OnClickListener 
         startActivity(i);
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+    @Override
+    protected void onRestart(){ super.onRestart(); }
+
 }

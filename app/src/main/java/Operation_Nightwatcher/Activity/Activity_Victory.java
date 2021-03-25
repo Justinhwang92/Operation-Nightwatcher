@@ -80,6 +80,15 @@ public class Activity_Victory extends Activity implements View.OnClickListener  
         return true;
     }
 
-
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+    @Override
+    protected void onRestart(){ super.onRestart(); }
 
 }
