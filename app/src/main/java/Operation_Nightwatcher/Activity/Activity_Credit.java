@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.td.OperationNightwatcher.R;
 
+
 public class Activity_Credit extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,22 @@ public class Activity_Credit extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-//        Intent i = new Intent(this, Activity_Game_Victory.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("Score",Integer.toString(gameDisplay.theScore));
-//        i.putExtras(bundle);
-//        startActivity(i);
-//        finish();
+        Intent i = new Intent(this, Activity_Victory.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Score",Integer.toString(Activity_Game.score));
+        i.putExtras(bundle);
+        startActivity(i);
+        finish();
     }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+    }
+    @Override
+    protected void onRestart(){ super.onRestart(); }
 }

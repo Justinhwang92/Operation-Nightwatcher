@@ -229,14 +229,24 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void doneGame(){
-        if(score == 10){
-            //Game victory
-            try {
-                TimerClass.getInstance().cancel();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        Intent intent;
+        if(score == 5){
+            //Victory
+            //Credit screen -> Game victory (just like asteroid fighter)
+            intent = new Intent(this, Activity_Credit.class);
         }
+        else{
+            //Game over
+            intent = new Intent(this, Activity_Gameover.class);
+        }
+
+        Bundle bundle = new Bundle();
+        String points;
+        points = Integer.toString(score);
+        bundle.putString("Score",points);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     @Override

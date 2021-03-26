@@ -40,6 +40,15 @@
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Instruction"
             android:screenOrientation="landscape" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Credit"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Gameover"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Victory"
+            android:screenOrientation="landscape" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
