@@ -1,6 +1,9 @@
 package Operation_Nightwatcher.Activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioAttributes;
@@ -10,12 +13,14 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,13 +31,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 
+import Operation_Nightwatcher.Game.BroadcastService;
 import Operation_Nightwatcher.Game.TimerClass;
 
 //this class represents the main gameplay loop
 public class Activity_Game extends AppCompatActivity {
     //the room you go into when you click a door
     Activity_Room activityRoom;
-    static int time;
+    static int time = 900000;
     static int score;
     private ImageView img_profile;
 
@@ -40,6 +46,7 @@ public class Activity_Game extends AppCompatActivity {
 
 
     private MediaPlayer myBGM;
+    private final static String TAG = "BroadcastService";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -53,47 +60,43 @@ public class Activity_Game extends AppCompatActivity {
 
         activityRoom = new Activity_Room();
         score = 0;
+
 //        allImagesnumber = new ArrayList<>();
 
+//        startService(new Intent(this, BroadcastService.class));
+//        Log.i(TAG, "Started service");
 
-        TimerClass counterClass = TimerClass.initInstance(900000, 1000);
+        if(time != 0) {
+            new CountDownTimer(time, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    time = (int) millisUntilFinished;
+                    millisUntilFinished = millisUntilFinished / 1000;
+                    ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+                            (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+                    ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
+//                    System.out.println("Started : **********************************************");
+                }
 
-//        counterClass.start();
-//        TimerClass.initInstance((15*60*1000), 1000);
-        try {
-            counterClass = TimerClass.getInstance();
-            counterClass.start();
-            System.out.println("Timer: " + counterClass.getFormatedTime());
-//            ((TextView) findViewById(R.id.time)).setText(counterClass.getFormatedTime());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
-        //to start the time of 15 minutes
-        time = counterClass.time;
-
-        new CountDownTimer(time, 1000){
-            @Override
-            public void onTick(long millisUntilFinished) {
-                millisUntilFinished = millisUntilFinished/1000;
-                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
-                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
-            }
-
-            @Override
-            public void onFinish() {
-                System.out.println("Done timer");
+                @Override
+                public void onFinish() {
+//                System.out.println("Done timer");
 //                Intent finish = new Intent(Activity_Game.this, Activity_Menu.class);
 //                startActivity(finish);
-            }
-        }.start();
+                    Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
+                    t.show();
+                    doneGame();
+                    Intent finish = new Intent(Activity_Game.this, Activity_Menu.class);
+                    startActivity(finish);
+
+//                finish();
+                }
+            }.start();
+        }
 
         //door blinking animation
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(100);
+        anim.setDuration(1000);
         anim.setStartOffset(20);
         anim.setRepeatMode(Animation.REVERSE);
         anim.setRepeatCount(Animation.INFINITE);
@@ -115,8 +118,35 @@ public class Activity_Game extends AppCompatActivity {
         }
     }
 
+//    private BroadcastReceiver br = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            updateGUI(intent); // or whatever method used to update your GUI fields
+//        }
+//    };
 
+    private void updateGUI(Intent intent) {
+        if (intent.getExtras() != null) {
+            long millisUntilFinished = intent.getLongExtra("countdown", 0);
+            int flag = intent.getIntExtra("done", 0);
 
+            if(flag == 999){
+                Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
+                t.show();
+                doneGame();
+                finish();
+            }
+            else {
+//            Log.i(TAG, "Countdown seconds remaining: " +  millisUntilFinished / 1000);
+                System.out.println("Recieved : time = " + millisUntilFinished);
+//                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+//                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+                String tim = "Time: " + ((millisUntilFinished % 3600)/60) + ":" + (millisUntilFinished%60);
+                ((TextView) findViewById(R.id.time)).setText(millisUntilFinished+"");
+                ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
+            }
+        }
+    }
 //    }
 
     //below are onclick methods for the doors
@@ -199,21 +229,31 @@ public class Activity_Game extends AppCompatActivity {
     }
 
     public void doneGame(){
-        if(score == 5){
+        if(score == 10){
             //Game victory
-        }
-        else{
-            //Game over
+            try {
+                TimerClass.getInstance().cancel();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     protected void onStop(){
         super.onStop();
+        stopService(new Intent(this, BroadcastService.class));
     }
     @Override
     protected void onStart(){
+
         super.onStart();
+        try {
+            TimerClass.getInstance().start();
+//            System.out.println("\n *************** \n time "+TimerClass.time+" \n ************");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     protected void onRestart(){ super.onRestart(); }
@@ -228,6 +268,59 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+//        registerReceiver(br, new IntentFilter(BroadcastService.COUNTDOWN_BR1));
+//        Log.i(TAG, "Registered broacast receiver");
+
+        TimerClass counterClass;
+
+////        counterClass.start();
+////        TimerClass.initInstance((15*60*1000), 1000);
+//        try {
+//            counterClass = TimerClass.getInstance();
+////            counterClass.start();
+//            time = counterClass.time;
+////            System.out.println("Timer: " + counterClass.getFormatedTime());
+////            ((TextView) findViewById(R.id.time)).setText(counterClass.getFormatedTime());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+////        TimerClass counter;
+//        try {
+////            counter = TimerClass.getInstance();
+//            //to start the time of 15 minutes
+//            System.out.println("\n****\ntime : "+time);
+//        } catch(Exception e){
+//            System.out.println("Found error.");
+//        }
+//
+//        doneGame();
+//
+//        if(time != 0) {
+//            new CountDownTimer(time, 1000) {
+//                @Override
+//                public void onTick(long millisUntilFinished) {
+//                    millisUntilFinished = millisUntilFinished / 1000;
+//                    ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+//                            (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+//                    ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
+//                }
+//
+//                @Override
+//                public void onFinish() {
+////                System.out.println("Done timer");
+////                Intent finish = new Intent(Activity_Game.this, Activity_Menu.class);
+////                startActivity(finish);
+//                    Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
+//                    t.show();
+//                    doneGame();
+////                finish();
+//                }
+//            }.start();
+//        }
+
         if (myBGM != null)
             myBGM.start();
     }

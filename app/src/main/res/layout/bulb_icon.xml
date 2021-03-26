@@ -6,15 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ImageView
+    <RelativeLayout
+        android:layout_width="122dp"
         android:id="@+id/bulbicon"
-        android:layout_width="227dp"
-        android:layout_height="205dp"
-        android:layout_marginBottom="248dp"
+        android:layout_height="137dp"
+        android:background="@drawable/light_stage1_removebg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintHorizontal_bias="0.71"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/light_stage1_removebg" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/bulbicon"-->
+        <!--            android:layout_width="199dp"-->
+        <!--            android:layout_height="179dp"-->
+        <!--            android:layout_marginBottom="248dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.779"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:srcCompat="@drawable/light_stage1_removebg" />-->
+
+    </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

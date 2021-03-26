@@ -48,4 +48,7 @@
         <item name="android:layout_marginBottom">@dimen/_7sdp</item>
         <item name="android:src">@drawable/previous1</item>
     </style>
+    <style name="textStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@color/black</item>
+    </style>
 </resources>

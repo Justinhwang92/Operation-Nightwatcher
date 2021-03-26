@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/calcPlus"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -42,8 +42,8 @@
 
     <Button
         android:id="@+id/calcPower"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -63,8 +63,8 @@
 
     <Button
         android:id="@+id/calcE"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -85,7 +85,7 @@
 
     <Button
         android:id="@+id/calcLeftParentheses"
-        android:layout_width="75dp"
+        android:layout_width="91dp"
         android:layout_height="25dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -106,8 +106,8 @@
 
     <Button
         android:id="@+id/calcSin"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -115,7 +115,7 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="sin"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc1"
@@ -127,8 +127,8 @@
 
     <Button
         android:id="@+id/calc5"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -148,7 +148,7 @@
 
     <Button
         android:id="@+id/calcRightParentheses"
-        android:layout_width="75dp"
+        android:layout_width="89dp"
         android:layout_height="25dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -170,8 +170,8 @@
 
     <Button
         android:id="@+id/calcEquals"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -191,8 +191,8 @@
 
     <Button
         android:id="@+id/calcCE"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="33dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -200,20 +200,20 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="CE"
-        android:textSize="25sp"
+        android:textSize="23sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calcTimes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintHorizontal_bias="0.001"
         app:layout_constraintStart_toEndOf="@+id/calcDivide"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.682" />
 
     <Button
         android:id="@+id/calc2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -233,7 +233,7 @@
 
     <Button
         android:id="@+id/calcLn"
-        android:layout_width="50dp"
+        android:layout_width="46dp"
         android:layout_height="25dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -254,8 +254,8 @@
 
     <Button
         android:id="@+id/calcAC"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -263,20 +263,20 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="AC"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
-        app:layout_constraintStart_toEndOf="@+id/calcTimes"
-        app:layout_constraintTop_toBottomOf="@+id/calcCE"
+        app:layout_constraintHorizontal_bias="0.001"
+        app:layout_constraintStart_toEndOf="@+id/calcPower"
+        app:layout_constraintTop_toBottomOf="@+id/calcRightParentheses"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/calcPeriod"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -296,8 +296,8 @@
 
     <Button
         android:id="@+id/calc7"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -317,8 +317,8 @@
 
     <Button
         android:id="@+id/calcTimes"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -329,17 +329,17 @@
         android:textSize="25sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/calcMinus"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.001"
-        app:layout_constraintStart_toEndOf="@+id/calcInv"
+        app:layout_constraintStart_toEndOf="@+id/calcPeriod"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.91" />
 
     <Button
         android:id="@+id/calc1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -359,7 +359,7 @@
 
     <Button
         android:id="@+id/calcInv"
-        android:layout_width="50dp"
+        android:layout_width="47dp"
         android:layout_height="25dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -380,8 +380,8 @@
 
     <Button
         android:id="@+id/calcDivide"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -401,8 +401,8 @@
 
     <Button
         android:id="@+id/calc9"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -422,8 +422,8 @@
 
     <Button
         android:id="@+id/calc6"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -443,8 +443,8 @@
 
     <TextView
         android:id="@+id/calcTextView"
-        android:layout_width="248dp"
-        android:layout_height="43dp"
+        android:layout_width="181dp"
+        android:layout_height="44dp"
         android:background="#B1B1B1"
         android:enabled="false"
         android:paddingLeft="0dp"
@@ -461,12 +461,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        tools:text="0" />
+        tools:text="00" />
 
     <Button
         android:id="@+id/calc4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -486,8 +486,8 @@
 
     <Button
         android:id="@+id/calcPi"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -508,8 +508,9 @@
 
     <Button
         android:id="@+id/calcTan"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="#AA7171"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -517,20 +518,20 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="tan"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.001"
+        app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintStart_toEndOf="@+id/calcCos"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/calc0"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -550,7 +551,7 @@
 
     <Button
         android:id="@+id/calcSqrt"
-        android:layout_width="50dp"
+        android:layout_width="46dp"
         android:layout_height="25dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -571,8 +572,8 @@
 
     <Button
         android:id="@+id/calc8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -592,8 +593,8 @@
 
     <Button
         android:id="@+id/calc3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -613,8 +614,8 @@
 
     <Button
         android:id="@+id/calcCos"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
@@ -622,7 +623,7 @@
         android:paddingRight="0dp"
         android:paddingBottom="0dp"
         android:text="cos"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:elevation="0dp"
         app:iconPadding="0dp"
         app:layout_constraintBottom_toTopOf="@+id/calc2"
@@ -634,8 +635,8 @@
 
     <Button
         android:id="@+id/calcMinus"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"

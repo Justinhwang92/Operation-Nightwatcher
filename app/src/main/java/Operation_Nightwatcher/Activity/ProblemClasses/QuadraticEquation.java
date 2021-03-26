@@ -49,10 +49,14 @@ public class QuadraticEquation {
 
          myQue = "Find the solutions for the given quadratic equation: \n"+a + "x\u00B2 + " +b+ "x + " + c+" = 0 \n Provide only one !";
 //        System.out.println(myQue);
-         double temp = (-1*b + Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
-         solOne = new BigDecimal(temp).setScale(2, BigDecimal.ROUND_CEILING);
-         temp = (-b - Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
-         solTwo = new BigDecimal(temp).setScale(2, BigDecimal.ROUND_CEILING);
+        try {
+            double temp = (-1 * b + Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
+            solOne = new BigDecimal(temp).setScale(2, BigDecimal.ROUND_CEILING);
+            temp = (-b - Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
+            solTwo = new BigDecimal(temp).setScale(2, BigDecimal.ROUND_CEILING);
+        }catch (Exception e){
+            generateQuestion();
+        }
     }
 
     /**

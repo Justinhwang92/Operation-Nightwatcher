@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.td.OperationNightwatcher.R;
 
 import Operation_Nightwatcher.Game.Calculator;
+import Operation_Nightwatcher.Game.TimerClass;
 
 //activity for the main menu of the game
 public class Activity_Menu extends AppCompatActivity implements View.OnClickListener {
@@ -69,6 +70,7 @@ public class Activity_Menu extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.playButton:
+                TimerClass counterClass = TimerClass.initInstance(900000, 1000);
                 startActivity(i);
                 if (myBGM != null) {
                     if (myBGM.isPlaying())

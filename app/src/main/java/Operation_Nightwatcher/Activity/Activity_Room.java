@@ -8,6 +8,9 @@ import android.os.Build;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -205,23 +208,45 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
 
         //for 15 minutes timer game clock
         //timer class object to receive exact time
-        TimerClass counter;
+//        TimerClass counter;
         try {
-            counter = TimerClass.getInstance();
-            System.out.println("Timer: " + counter.getFormatedTime());
+//            counter = TimerClass.getInstance();
+//            System.out.println("Timer: " + counter.getFormatedTime());
 //            ((TextView) findViewById(R.id.time)).setText(counter.getFormatedTime());
 
-            new CountDownTimer(counter.time, 1000){
+            new CountDownTimer(Activity_Game.time, 1000){
                 @Override
                 public void onTick(long millisUntilFinished) {
+                    Activity_Game.time = (int) millisUntilFinished;
                     millisUntilFinished = millisUntilFinished/1000;
                     ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
                             (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+
+                    if(Activity_Game.time < (180000)){
+                        //stage 4 on
+//                        System.out.println("\n******\n 4");
+                        findViewById(R.id.bulbicon).setVisibility(View.GONE);
+                        findViewById(R.id.bulbicon).setBackgroundResource(R.drawable.light_stage4_removebg);
+                    }
+                    else if(Activity_Game.time < (360000)){ //22500*2
+//                        System.out.println("\n******\n 3");
+                        findViewById(R.id.bulbicon).setVisibility(View.GONE);
+                        findViewById(R.id.bulbicon).setBackgroundResource(R.drawable.light_stage3_removebg);
+                    }
+                    else if(Activity_Game.time < (540000)){
+//                        System.out.println("\n******\n 2");
+                        findViewById(R.id.bulbicon).setVisibility(View.GONE);
+                        findViewById(R.id.bulbicon).setBackgroundResource(R.drawable.light_stage2_removebg);
+                    }
+                    else{
+                        //nothing basically as it is already on stage 1 for the light
+//                        System.out.println("\n *** \n 1");
+                    }
                 }
 
                 @Override
                 public void onFinish() {
-                    System.out.println("Activity done room class");
+//                    System.out.println("Activity done room class");
                     Intent finish = new Intent(Activity_Room.this, Activity_Menu.class);
                     startActivity(finish);
                 }
@@ -254,12 +279,18 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
 
         quesPrompt = findViewById(R.id.quePrompt);
         quesPrompt.setText(currentQuestion);
+        Spannable spanna = new SpannableString(currentQuestion);
+        spanna.setSpan(new BackgroundColorSpan(0xFF000000),0, currentQuestion.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        quesPrompt.setText(spanna);
+//        quesPrompt.setBackgroundResource(R.color.black);
     }
 
     public void nextQuestion(){
 
-        System.out.println("Yeah! That's Current Answer: ");
+//        System.out.println("Yeah! That's Current Answer: ");
 
+        Toast t = Toast.makeText( Activity_Room.this, "+2", Toast.LENGTH_SHORT+100);
+        t.show();
         //finish current room activity and go back to previous one
         finish();
 //        myQuesObject.generateQuestionChoice();
@@ -364,9 +395,9 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
                     //Increment in points
                     TextView score = findViewById(R.id.Currentscore);
                     currentScore = Integer.parseInt(score.getText().toString());
-                    currentScore++;
+                    currentScore+= 2;
 
-                    activity_game.score++;
+                    activity_game.score+= 2;
                     score.setText(activity_game.score + "");
 
                     //new question to be displayed
@@ -387,8 +418,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
                     //Do something
                     //Increment in points
                     TextView score = findViewById(R.id.Currentscore);
-                    currentScore++;
-                    activity_game.score++;
+                    currentScore+= 2;
+                    activity_game.score+= 2;
                     score.setText(activity_game.score + "");
 
                     //new question to be displayed
