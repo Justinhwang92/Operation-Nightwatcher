@@ -41,9 +41,9 @@ public class Activity_Game extends AppCompatActivity {
     static int time = 900000;
     static int score;
     private ImageView img_profile;
-
+    boolean done = false;
     static List<Integer> allImagesnumber = Arrays.asList(2,3,1,0,4);
-
+    CountDownTimer tt;
 
     private MediaPlayer myBGM;
     private final static String TAG = "BroadcastService";
@@ -66,8 +66,8 @@ public class Activity_Game extends AppCompatActivity {
 //        startService(new Intent(this, BroadcastService.class));
 //        Log.i(TAG, "Started service");
 
-        if(time != 0) {
-            new CountDownTimer(time, 1000) {
+        if(!done) {
+        tt  =   new CountDownTimer(time, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     time = (int) millisUntilFinished;
@@ -75,6 +75,7 @@ public class Activity_Game extends AppCompatActivity {
                     ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
                             (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
                     ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
+                    doneGame();
 //                    System.out.println("Started : **********************************************");
                 }
 
@@ -86,9 +87,14 @@ public class Activity_Game extends AppCompatActivity {
                     Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
                     t.show();
                     doneGame();
-                    Intent finish = new Intent(Activity_Game.this, Activity_Menu.class);
+                    Intent finish = new Intent(Activity_Game.this, Activity_Gameover.class);
+                    Bundle bundle = new Bundle();
+                    String points;
+                    points = Integer.toString(score);
+                    bundle.putString("Score",points);
+                    finish.putExtras(bundle);
                     startActivity(finish);
-
+                    finish();
 //                finish();
                 }
             }.start();
@@ -230,23 +236,26 @@ public class Activity_Game extends AppCompatActivity {
 
     public void doneGame(){
         Intent intent;
-        if(score == 5){
+        if(score == 10){
             //Victory
             //Credit screen -> Game victory (just like asteroid fighter)
+            done = true;
+            tt.cancel();
             intent = new Intent(this, Activity_Credit.class);
+            Bundle bundle = new Bundle();
+            String points;
+            points = Integer.toString(score);
+            bundle.putString("Score",points);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
         }
-        else{
-            //Game over
-            intent = new Intent(this, Activity_Gameover.class);
-        }
+//        else{
+//            Game over
+//            intent = new Intent(this, Activity_Gameover.class);
+//        }
 
-        Bundle bundle = new Bundle();
-        String points;
-        points = Integer.toString(score);
-        bundle.putString("Score",points);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+
     }
 
     @Override

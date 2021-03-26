@@ -247,8 +247,8 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onFinish() {
 //                    System.out.println("Activity done room class");
-                    Intent finish = new Intent(Activity_Room.this, Activity_Menu.class);
-                    startActivity(finish);
+//                    Intent finish = new Intent(Activity_Room.this, Activity_Menu.class);
+//                    startActivity(finish);
                 }
             }.start();
 
