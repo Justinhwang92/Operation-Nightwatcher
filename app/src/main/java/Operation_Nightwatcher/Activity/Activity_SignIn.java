@@ -1,5 +1,6 @@
 package Operation_Nightwatcher.Activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -68,7 +69,7 @@ public class Activity_SignIn extends AppCompatActivity {
                     // send profile picture to game room
                     if(selectedImage != null){
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        selectedImage.compress(Bitmap.CompressFormat.PNG, 50, stream);
                         byte[] bytes = stream.toByteArray();
                         intent.putExtra("profileImage",bytes);
                     }
