@@ -21,34 +21,43 @@
         </activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Menu"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" >
         </activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_BackStory"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" >
         </activity>
         <activity android:name="Operation_Nightwatcher.Activity.Activity_High_Scores" android:screenOrientation="landscape"></activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Room"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_SignIn"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Game"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Instruction"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Credit"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Gameover"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Victory"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
