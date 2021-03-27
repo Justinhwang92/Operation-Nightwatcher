@@ -36,10 +36,12 @@
     <TextView
         android:id="@+id/title"
         style="@style/TittleStyle"
-        android:layout_marginTop="@dimen/_35sdp"
-        android:text="Operation Nightwatcher"
+        android:layout_marginTop="24dp"
+        android:text="5 doors to Escape the Haunted House of Physics"
         android:textColor="@color/white"
+        android:textSize="37sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -510,7 +510,7 @@
         android:id="@+id/calcTan"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="#AA7171"
+        android:background="#2B2B2B"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:paddingLeft="0dp"
