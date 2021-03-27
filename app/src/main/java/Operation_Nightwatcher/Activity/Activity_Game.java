@@ -49,7 +49,6 @@ public class Activity_Game extends AppCompatActivity {
     CountDownTimer tt;
 
     private MediaPlayer myBGM;
-    private final static String TAG = "BroadcastService";
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -140,28 +139,28 @@ public class Activity_Game extends AppCompatActivity {
 //        }
 //    };
 
-    private void updateGUI(Intent intent) {
-        if (intent.getExtras() != null) {
-            long millisUntilFinished = intent.getLongExtra("countdown", 0);
-            int flag = intent.getIntExtra("done", 0);
-
-            if(flag == 999){
-                Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
-                t.show();
-                doneGame();
-                finish();
-            }
-            else {
-//            Log.i(TAG, "Countdown seconds remaining: " +  millisUntilFinished / 1000);
-                System.out.println("Recieved : time = " + millisUntilFinished);
-//                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
-//                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
-                String tim = "Time: " + ((millisUntilFinished % 3600)/60) + ":" + (millisUntilFinished%60);
-                ((TextView) findViewById(R.id.time)).setText(millisUntilFinished+"");
-                ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
-            }
-        }
-    }
+//    private void updateGUI(Intent intent) {
+//        if (intent.getExtras() != null) {
+//            long millisUntilFinished = intent.getLongExtra("countdown", 0);
+//            int flag = intent.getIntExtra("done", 0);
+//
+//            if(flag == 999){
+//                Toast t = Toast.makeText(Activity_Game.this, "Time Out! ", Toast.LENGTH_SHORT + 100);
+//                t.show();
+//                doneGame();
+//                finish();
+//            }
+//            else {
+////            Log.i(TAG, "Countdown seconds remaining: " +  millisUntilFinished / 1000);
+//                System.out.println("Recieved : time = " + millisUntilFinished);
+////                ((TextView) findViewById(R.id.time)).setText(String.format("Time: %02d:%02d",
+////                        (millisUntilFinished % 3600) / 60, (millisUntilFinished % 60)) + "");
+//                String tim = "Time: " + ((millisUntilFinished % 3600)/60) + ":" + (millisUntilFinished%60);
+//                ((TextView) findViewById(R.id.time)).setText(millisUntilFinished+"");
+//                ((TextView) findViewById(R.id.scoreID)).setText("Score : " + score);
+//            }
+//        }
+//    }
 //    }
 
     //below are onclick methods for the doors
@@ -276,12 +275,12 @@ public class Activity_Game extends AppCompatActivity {
     protected void onStart(){
 
         super.onStart();
-        try {
-            TimerClass.getInstance().start();
+//        try {
+//            TimerClass.getInstance().start();
 //            System.out.println("\n *************** \n time "+TimerClass.time+" \n ************");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     @Override
     protected void onRestart(){ super.onRestart(); }
@@ -299,7 +298,7 @@ public class Activity_Game extends AppCompatActivity {
 //        registerReceiver(br, new IntentFilter(BroadcastService.COUNTDOWN_BR1));
 //        Log.i(TAG, "Registered broacast receiver");
 
-        TimerClass counterClass;
+//        TimerClass counterClass;
 
 ////        counterClass.start();
 ////        TimerClass.initInstance((15*60*1000), 1000);

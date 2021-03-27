@@ -262,7 +262,14 @@ public class Activity_Room  extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        ExpressionBuilder.onClick(view);
+
+        try {
+            ExpressionBuilder.onClick(view);
+        }
+        catch (Exception e){
+            Toast t = Toast.makeText(Activity_Room.this, "Try again with valid input !", Toast.LENGTH_SHORT + 100);
+            t.show();
+        }
     }
 
 

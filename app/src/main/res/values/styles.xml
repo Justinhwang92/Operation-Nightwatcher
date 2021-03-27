@@ -62,7 +62,7 @@
         <item name="colorPrimaryDark">#3700B3</item>
         <item name="colorAccent">#03DAC5</item>
     </style>
-    <style name="AppTheme.noActionBar">
+    <style name="AppTheme.noActionBar" parent="Theme.OperationNightwatcher">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>

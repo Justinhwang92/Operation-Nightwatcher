@@ -29,7 +29,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" >
         </activity>
-        <activity android:name="Operation_Nightwatcher.Activity.Activity_High_Scores" android:screenOrientation="landscape"></activity>
+        <activity android:name="Operation_Nightwatcher.Activity.Activity_High_Scores"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar"></activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Room"
             android:screenOrientation="landscape"
