@@ -10,6 +10,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.td.OperationNightwatcher.R;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -113,14 +116,20 @@ public class Activity_Game extends AppCompatActivity {
         findViewById(R.id.door4).startAnimation(anim);
         findViewById(R.id.door5).startAnimation(anim);
 
+
         // Initialize the image view
         img_profile = findViewById(R.id.img_profile);
 
-        if(getIntent().getByteArrayExtra("profileImage") != null && getIntent().getByteArrayExtra("profileImage").length > 0){
-            // set the profile image
-            byte[] bytes = getIntent().getByteArrayExtra("profileImage");
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            img_profile.setImageBitmap(bitmap);
+        if(getIntent().getParcelableExtra("imageUri") != null){
+            Uri imageUri = getIntent().getParcelableExtra("imageUri");
+            InputStream imageStream = null;
+            try {
+                imageStream = getContentResolver().openInputStream(imageUri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+            img_profile.setImageBitmap(selectedImage);
         }
     }
 

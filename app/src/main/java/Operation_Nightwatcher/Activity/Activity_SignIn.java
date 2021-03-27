@@ -43,6 +43,7 @@ public class Activity_SignIn extends AppCompatActivity {
     private Uri mMediaUri;
     private ImageView img_profile;
     Bitmap selectedImage;
+    Uri imageUri;
     static User user = new User();
 
     @Override
@@ -68,10 +69,7 @@ public class Activity_SignIn extends AppCompatActivity {
                     Intent intent = new Intent(Activity_SignIn.this, Activity_Game.class);
                     // send profile picture to game room
                     if(selectedImage != null){
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        selectedImage.compress(Bitmap.CompressFormat.PNG, 50, stream);
-                        byte[] bytes = stream.toByteArray();
-                        intent.putExtra("profileImage",bytes);
+                        intent.putExtra("imageUri", imageUri);
                     }
                     startActivity(intent);
                 }
@@ -123,7 +121,6 @@ public class Activity_SignIn extends AppCompatActivity {
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
-
         if (resultCode == RESULT_OK && data.getData()!=null) {
             try {
                 final Uri imageUri = data.getData();
