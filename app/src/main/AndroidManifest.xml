@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.td.OperationNightwatcher">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,21 +21,59 @@
         </activity>
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Menu"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" >
         </activity>
         <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_BackStory"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" >
+        </activity>
+        <activity android:name="Operation_Nightwatcher.Activity.Activity_High_Scores"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar"></activity>
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Room"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
             android:name="Operation_Nightwatcher.Activity.Activity_SignIn"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Game"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
         <activity
             android:name="Operation_Nightwatcher.Activity.Activity_Instruction"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Credit"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Gameover"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name="Operation_Nightwatcher.Activity.Activity_Victory"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <service android:name="Operation_Nightwatcher.Game.BroadcastService" />
     </application>
 
 </manifest>

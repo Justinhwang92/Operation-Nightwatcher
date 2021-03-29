@@ -4,19 +4,39 @@ import java.util.Random;
 
 public class KineticEnergy extends AbstractQuestions {
 
+    /**
+     * Random generator to generate random int values.
+     */
+    private Random rnd;
 
+    /**
+     * String to store current question
+     */
+    protected String myQue;
+
+    /**
+     * int value to store correct answer
+     */
+    protected int ans;
+
+    /**
+     * int values to store mass, velocity and energy
+     */
     protected int mass;
     protected int velocity;
     protected int energy;
-    private Random rnd;
-    protected int ans;
-    protected String myQue;
 
+    /**
+     * Constructor to initialize the random object
+     */
     public KineticEnergy(){
         rnd = new Random();
         generateQuestion();
     }
 
+    /**
+     * Method to generate the different questions
+     */
     private void generateQuestion(){
         mass = (rnd.nextInt(10)+1)*10 ;
         velocity = rnd.nextInt(30)+1;
@@ -47,11 +67,19 @@ public class KineticEnergy extends AbstractQuestions {
         }
     }
 
+    /**
+     * To get the question
+     * @return String myQue
+     */
     @Override
     public String getQuestion() {
         return myQue;
     }
 
+    /**
+     * To get the answer
+     * @return String the correct answer
+     */
     @Override
     public String getAnswer() {
         return ans+"";

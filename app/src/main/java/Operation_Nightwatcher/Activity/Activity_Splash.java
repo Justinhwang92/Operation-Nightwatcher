@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import com.td.OperationNightwatcher.R;
 
+//splash screen -- same as the one from Asteroid Fighter
 public class Activity_Splash extends Activity {
 
     /** Duration of wait **/
